@@ -22,7 +22,7 @@ export class DistrictController {
   constructor(private readonly districtService: DistrictService) {}
 
   // @UseGuards(AdminGuard)
-  @ApiOperation({ summary: 'for create district' })
+  @ApiOperation({ summary: 'to create district' })
   @ApiResponse({ status: 200, description: 'New district' })
   @Post('create')
   async createDistrict(@Body() createDistrictDto: CreateDistrictDto) {
@@ -32,14 +32,14 @@ export class DistrictController {
     return district;
   }
 
-  @ApiOperation({ summary: 'take all districtes' })
+  @ApiOperation({ summary: 'get all districtes' })
   @ApiResponse({ status: 200, description: 'get all district' })
   @Get('all')
   async getAllDistrict(): Promise<District[]> {
     return this.districtService.getAllDistricts();
   }
 
-  @ApiOperation({ summary: 'take districts by id' })
+  @ApiOperation({ summary: 'get districts by id' })
   @ApiResponse({ status: 200, description: 'get district by id' })
   @Get(':id')
   async getDistrictById(@Param('id') id: string): Promise<District> {
@@ -47,17 +47,17 @@ export class DistrictController {
   }
 
   // @UseGuards(AdminGuard)
-  @ApiOperation({ summary: 'for delete district' })
+  @ApiOperation({ summary: 'to delete district' })
   @ApiResponse({ status: 200, description: 'delete district' })
-  @Delete(':id')
+  @Delete('delete/:id')
   async deleteDistrictById(@Param('id') id: string): Promise<number> {
     return this.districtService.deleteDistrictById(+id);
   }
 
   // @UseGuards(AdminGuard)
-  @ApiOperation({ summary: 'for update district' })
+  @ApiOperation({ summary: 'to update district' })
   @ApiResponse({ status: 200, description: 'update district' })
-  @Put(':id')
+  @Put('update/:id')
   async updateDistrict(
     @Param('id') id: string,
     @Body() updateDistrictDto: UpdateDistrictDto,
