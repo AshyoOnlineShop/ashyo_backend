@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { DistrictModule } from './district/district.module';
 import { District } from './district/model/district.model';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { District } from './district/model/district.model';
       logging: false,
     }),
     DistrictModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],
