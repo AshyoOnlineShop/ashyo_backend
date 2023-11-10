@@ -1,9 +1,10 @@
+import { Stuff } from './stuff/model/stuff.model';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { DistrictModule } from './district/district.module';
 import { District } from './district/model/district.model';
-import { AdminModule } from './admin/admin.module';
+import { StuffModule } from './stuff/stuff.module';
 
 @Module({
   imports: [
@@ -15,12 +16,12 @@ import { AdminModule } from './admin/admin.module';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [District],
+      models: [District, Stuff],
       autoLoadModels: true,
       logging: false,
     }),
     DistrictModule,
-    AdminModule,
+    StuffModule,
   ],
   controllers: [],
   providers: [],
