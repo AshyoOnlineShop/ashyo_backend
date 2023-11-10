@@ -8,7 +8,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-// import { Region } from '../../region/model/region.model';
+import { Region } from '../../region/models/region.model';
 
 interface DistrictAttr {
   name: string;
@@ -33,13 +33,13 @@ export class District extends Model<District, DistrictAttr> {
   })
   name: string;
 
-  // @ApiProperty({ example: 1, description: 'region id' })
-  // @ForeignKey(() => Region)
-  // @Column({
-  //   type: DataType.INTEGER,
-  // })
-  // region_id: number;
-  // @BelongsTo(() => Region)
-  // region: Region;
+  @ApiProperty({ example: 1, description: 'region id' })
+  @ForeignKey(() => Region)
+  @Column({
+    type: DataType.INTEGER,
+  })
+  region_id: number;
 
+  @BelongsTo(() => Region)
+  region: Region;
 }
