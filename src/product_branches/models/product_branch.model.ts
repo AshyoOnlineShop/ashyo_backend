@@ -3,10 +3,12 @@ import {
   BelongsTo,
   Column,
   DataType,
+  ForeignKey,
   HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Branch } from '../../branches/models/branch.model';
 interface ProductBranchAttr {
   product_id: number;
   branch_id: number;
@@ -22,15 +24,20 @@ export class ProductBranch extends Model<ProductBranch, ProductBranchAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: 1, description: "product's id" })
+  // @ForeignKey(() => Product)
+  @ApiProperty({ example: 1, description: 'product id' })
   @Column({
     type: DataType.INTEGER,
   })
   product_id: number;
 
-  @ApiProperty({ example: 1, description: "branch's id" })
+  @ForeignKey(() => Branch)
+  @ApiProperty({ example: 1, description: 'branch id' })
   @Column({
     type: DataType.INTEGER,
   })
   branch_id: number;
+
+  //================== Relationships ================================
+
 }

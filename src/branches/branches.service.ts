@@ -40,7 +40,6 @@ export class BranchesService {
       where: { id },
       returning: true,
     });
-    console.log(branch);
 
     return branch[1][0].dataValues;
   }
