@@ -4,8 +4,6 @@ import {
   IsString,
   IsEmail,
   IsNotEmpty,
-  IsLatitude,
-  IsLongitude,
 } from 'class-validator';
 
 export class CreateBranchDto {
@@ -26,6 +24,7 @@ export class CreateBranchDto {
   // @IsNumber()
   // @IsNotEmpty()
   // latitude: number;
+
 
   @ApiProperty({
     example: 'Amir Temur street, home 8',

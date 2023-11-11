@@ -3,8 +3,6 @@ import {
   IsNumber,
   IsString,
   IsNotEmpty,
-  IsLatitude,
-  IsLongitude,
 } from 'class-validator';
 
 export class CreateCustomerLocationDto {
@@ -22,6 +20,7 @@ export class CreateCustomerLocationDto {
   // @IsNumber()
   // @IsNotEmpty()
   // longitude: number;
+
 
   @ApiProperty({
     example: 'Customer location details',

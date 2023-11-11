@@ -39,6 +39,7 @@ export class Branch extends Model<Branch, BranchAttr> {
   })
   region_id: number;
 
+
   // @ApiProperty({
   //   example: 78978,
   //   description: 'longitude of branch',
@@ -53,6 +54,7 @@ export class Branch extends Model<Branch, BranchAttr> {
   //   type: DataType.FLOAT,
   // })
   // latitude: number;
+
 
   @ApiProperty({
     example: 'Amir Temur street, home 8',

@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateBranchDto } from './create-branch.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString, IsEmail, IsLatitude, IsLongitude } from 'class-validator';
+import { IsNumber, IsString, IsEmail } from 'class-validator';
 
 export class UpdateBranchDto extends PartialType(CreateBranchDto) {
 

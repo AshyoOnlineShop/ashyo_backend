@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateCustomerLocationDto } from './create-customer_location.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString, IsLatitude, IsLongitude } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class UpdateCustomerLocationDto extends PartialType(
   CreateCustomerLocationDto,
