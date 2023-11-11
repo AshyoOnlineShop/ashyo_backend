@@ -7,6 +7,7 @@ import {
   Table,
   ForeignKey,
   BelongsTo,
+  Default
 } from 'sequelize-typescript';
 // import { Region } from '../../region/model/region.model';
 
@@ -83,6 +84,7 @@ export class Stuff extends Model<Stuff, StuffAttr> {
   })
   birthdate: Date
 
+  @Default(false)
   @ApiProperty({ example: false, description: 'is active' })
   @Column({
     type: DataType.BOOLEAN,

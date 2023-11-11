@@ -5,6 +5,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { DistrictModule } from './district/district.module';
 import { District } from './district/model/district.model';
 import { StuffModule } from './stuff/stuff.module';
+import { DeliverAuthModule } from './deliver-auth/auth.module';
+import { AdminAuthModule } from './admin-auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { StuffModule } from './stuff/stuff.module';
     }),
     DistrictModule,
     StuffModule,
+    DeliverAuthModule,
+    AdminAuthModule
   ],
   controllers: [],
   providers: [],
