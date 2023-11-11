@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { DistrictService } from './district.service';
 import { CreateDistrictDto } from './dto/create-district.dto';
-import { District } from './model/district.model';
+import { District } from './models/district.model';
 import { UpdateDistrictDto } from './dto/update-district.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 // import { AdminSelfGuard } from '../guards/admin.self.guard';

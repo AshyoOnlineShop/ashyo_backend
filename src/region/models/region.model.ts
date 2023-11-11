@@ -7,7 +7,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { District } from '../../district/model/district.model';
+import { District } from '../../district/models/district.model';
 import { Branch } from '../../branches/models/branch.model';
 // import { Customer_location } from '../../district/models/customer_location.model';
 interface RegionAttr {
