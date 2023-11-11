@@ -12,8 +12,6 @@ import {
 interface CustomerLocationAttr {
   customer_id: number;
   region_id: number;
-  latitude: number;
-  longitude: number;
   details: string;
 }
 
@@ -35,18 +33,6 @@ export class CustomerLocation extends Model<
     type: DataType.INTEGER,
   })
   customer_id: number;
-
-  @ApiProperty({ example: 1, description: 'latitude of customer location' })
-  @Column({
-    type: DataType.FLOAT,
-  })
-  latitude: number;
-
-  @ApiProperty({ example: 1, description: 'longitude of customer location' })
-  @Column({
-    type: DataType.FLOAT,
-  })
-  longitude: number;
 
   @ApiProperty({ example: 1, description: 'details of customer location' })
   @Column({

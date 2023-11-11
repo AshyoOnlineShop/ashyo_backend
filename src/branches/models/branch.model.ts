@@ -14,8 +14,6 @@ import { AboutShop } from '../../about_shop/models/about_shop.model';
 
 interface BranchAttr {
   region_id: number;
-  longitude: number;
-  latitude: number;
   details: string;
   phone: string;
   email: string;
@@ -38,21 +36,6 @@ export class Branch extends Model<Branch, BranchAttr> {
     allowNull: false,
   })
   region_id: number;
-
-  @ApiProperty({
-    example: 78978,
-    description: 'longitude of branch',
-  })
-  @Column({
-    type: DataType.FLOAT,
-  })
-  longitude: number;
-
-  @ApiProperty({ example: 8789, description: 'longitude of branch' })
-  @Column({
-    type: DataType.FLOAT,
-  })
-  latitude: number;
 
   @ApiProperty({
     example: 'Amir Temur street, home 8',
