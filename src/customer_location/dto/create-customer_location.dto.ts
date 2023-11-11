@@ -13,15 +13,15 @@ export class CreateCustomerLocationDto {
   @IsNotEmpty()
   customer_id: number;
 
-  @ApiProperty({ example: 1.0, description: 'latitude of customer location' })
-  @IsNumber()
-  @IsNotEmpty()
-  latitude: number;
+  // @ApiProperty({ example: 1.0, description: 'latitude of customer location' })
+  // @IsNumber()
+  // @IsNotEmpty()
+  // latitude: number;
 
-  @ApiProperty({ example: 1.0, description: 'longitude of customer location' })
-  @IsNumber()
-  @IsNotEmpty()
-  longitude: number;
+  // @ApiProperty({ example: 1.0, description: 'longitude of customer location' })
+  // @IsNumber()
+  // @IsNotEmpty()
+  // longitude: number;
 
   @ApiProperty({
     example: 'Customer location details',

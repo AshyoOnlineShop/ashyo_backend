@@ -10,13 +10,13 @@ export class UpdateCustomerLocationDto extends PartialType(
   @IsNumber()
   customer_id: number;
 
-  @ApiProperty({ example: 1.0, description: 'latitude of customer location' })
-  @IsNumber()
-  latitude: number;
+  // @ApiProperty({ example: 1.0, description: 'latitude of customer location' })
+  // @IsNumber()
+  // latitude: number;
 
-  @ApiProperty({ example: 1.0, description: 'longitude of customer location' })
-  @IsNumber()
-  longitude: number;
+  // @ApiProperty({ example: 1.0, description: 'longitude of customer location' })
+  // @IsNumber()
+  // longitude: number;
 
   @ApiProperty({
     example: 'Customer location details',
