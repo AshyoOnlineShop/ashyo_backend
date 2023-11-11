@@ -7,6 +7,8 @@ import { RegionModule } from './region/region.module';
 import { Region } from './region/models/region.model';
 import { AboutShopModule } from './about_shop/about_shop.module';
 import { AboutShop } from './about_shop/models/about_shop.model';
+import { BranchesModule } from './branches/branches.module';
+import { Branch } from './branches/models/branch.model';
 
 @Module({
   imports: [
@@ -18,13 +20,14 @@ import { AboutShop } from './about_shop/models/about_shop.model';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [District, Region, AboutShop],
+      models: [District, Region, AboutShop, Branch],
       autoLoadModels: true,
       logging: false,
     }),
     DistrictModule,
     RegionModule,
     AboutShopModule,
+    BranchesModule,
   ],
   controllers: [],
   providers: [],

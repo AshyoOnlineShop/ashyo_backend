@@ -1,8 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  HasMany,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 import { District } from '../../district/model/district.model';
-// import { Branches } from '../../district/model/branches.model';
-// import { Customer_location } from '../../district/model/customer_location.model';
+import { Branch } from '../../branches/models/branch.model';
+// import { Customer_location } from '../../district/models/customer_location.model';
 interface RegionAttr {
   name: string;
 }
@@ -25,11 +32,14 @@ export class Region extends Model<Region, RegionAttr> {
   })
   name: string;
 
-  @HasMany(() => District)
-  district: District[];
+  // @HasMany(() => District)
+  // district: District[];
 
-  //   @BelongsTo((Branches) => )
-  //   branches: Branches;
+  // @HasMany(() => Branch)
+  // branches: Branch[];
+
+  // @BelongsTo(() => Branch)
+  // branches: Branch;
 
   // @BelongsTo((Customer_location) => )
   // customer_location: Customer_location;

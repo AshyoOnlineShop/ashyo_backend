@@ -34,12 +34,12 @@ export class District extends Model<District, DistrictAttr> {
   name: string;
 
   @ApiProperty({ example: 1, description: 'region id' })
-  @ForeignKey(() => Region)
+  // @ForeignKey(() => Region)
   @Column({
     type: DataType.INTEGER,
   })
   region_id: number;
 
-  @BelongsTo(() => Region)
-  region: Region;
+  // @BelongsTo(() => Region)
+  // region: Region;
 }
