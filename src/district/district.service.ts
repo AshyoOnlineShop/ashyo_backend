@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDistrictDto } from './dto/create-district.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { District } from './model/district.model';
+import { District } from './models/district.model';
 import { UpdateDistrictDto } from './dto/update-district.dto';
 
 @Injectable()
@@ -11,13 +11,17 @@ export class DistrictService {
     private districtRepo: typeof District,
   ) {}
 
-  async createDistrict(createDistrictDto: CreateDistrictDto): Promise<District> {
+  async createDistrict(
+    createDistrictDto: CreateDistrictDto,
+  ): Promise<District> {
     const district = await this.districtRepo.create(createDistrictDto);
     return district;
   }
 
   async getAllDistricts(): Promise<District[]> {
-    const district = await this.districtRepo.findAll({ include: { all: true } });
+    const district = await this.districtRepo.findAll({
+      include: { all: true },
+    });
     return district;
   }
 
@@ -41,7 +45,7 @@ export class DistrictService {
       returning: true,
     });
     console.log(district);
-    
+
     return district[1][0].dataValues;
   }
 }
