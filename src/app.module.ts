@@ -13,6 +13,8 @@ import { CustomerLocationModule } from './customer_location/customer_location.mo
 import { CustomerLocation } from './customer_location/models/customer_location.model';
 import { Customer } from './customer/models/customer.model';
 import { CustomerModule } from './customer/customer.module';
+import { ProductBranchesModule } from './product_branches/product_branches.module';
+import { ProductBranch } from './product_branches/models/product_branch.model';
 
 @Module({
   imports: [
@@ -24,7 +26,15 @@ import { CustomerModule } from './customer/customer.module';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [District, Region, AboutShop, Branch, CustomerLocation, Customer],
+      models: [
+        District,
+        Region,
+        AboutShop,
+        Branch,
+        CustomerLocation,
+        ProductBranch,
+        Customer,
+      ],
       autoLoadModels: true,
       logging: false,
     }),
@@ -34,6 +44,7 @@ import { CustomerModule } from './customer/customer.module';
     BranchesModule,
     CustomerLocationModule,
     CustomerModule,
+    ProductBranchesModule,
   ],
   controllers: [],
   providers: [],

@@ -9,6 +9,13 @@ export class UpdateBranchDto extends PartialType(CreateBranchDto) {
   @IsNumber()
   region_id?: number;
 
+  // @IsNumber()
+  // longitude: number;
+
+  // @ApiProperty({ example: 7878, description: 'latitude of branch' })
+  // @IsNumber()
+  // latitude: number;
+
   @ApiProperty({
     example: 'Amir Temur street, home 8',
     description: 'details of branch location',

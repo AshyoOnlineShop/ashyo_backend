@@ -12,6 +12,20 @@ export class CreateBranchDto {
   @IsNotEmpty()
   region_id: number;
 
+  // @ApiProperty({
+  //   example: 6776,
+  //   description: 'longitude of branch',
+  // })
+  // @IsNumber()
+  // @IsNotEmpty()
+  // longitude: number;
+
+  // @ApiProperty({ example: 7878, description: 'latitude of branch' })
+  // @IsNumber()
+  // @IsNotEmpty()
+  // latitude: number;
+
+
   @ApiProperty({
     example: 'Amir Temur street, home 8',
     description: 'details of branch location',
