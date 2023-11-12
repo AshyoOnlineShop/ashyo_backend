@@ -10,7 +10,7 @@ export class CategoryService {
   }
 
   async findAll() {
-    return Category.findAll();
+    return Category.findAll({ include: { all: true } });
   }
 
   async findOne(id: number) {

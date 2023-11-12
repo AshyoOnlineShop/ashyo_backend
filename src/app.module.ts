@@ -19,6 +19,8 @@ import { CategoryModule } from './category/category.module';
 import { Category } from './category/model/category.model';
 import { Stuff } from './stuff/models/stuff.model';
 import { StuffModule } from './stuff/stuff.module';
+import { Product } from './products/models/product.model';
+import { ProductModule } from './products/product.module';
 
 @Module({
   imports: [
@@ -38,8 +40,9 @@ import { StuffModule } from './stuff/stuff.module';
         CustomerLocation,
         ProductBranch,
         Customer,
-        Category
+        Category,
         Stuff,
+        Product,
       ],
       autoLoadModels: true,
       logging: false,
@@ -53,6 +56,7 @@ import { StuffModule } from './stuff/stuff.module';
     ProductBranchesModule,
     CategoryModule,
     StuffModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [],
