@@ -15,6 +15,8 @@ import { Customer } from './customer/models/customer.model';
 import { CustomerModule } from './customer/customer.module';
 import { ProductBranchesModule } from './product_branches/product_branches.module';
 import { ProductBranch } from './product_branches/models/product_branch.model';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/model/category.model';
 import { Stuff } from './stuff/models/stuff.model';
 import { StuffModule } from './stuff/stuff.module';
 
@@ -36,6 +38,7 @@ import { StuffModule } from './stuff/stuff.module';
         CustomerLocation,
         ProductBranch,
         Customer,
+        Category
         Stuff,
       ],
       autoLoadModels: true,
@@ -48,6 +51,7 @@ import { StuffModule } from './stuff/stuff.module';
     CustomerLocationModule,
     CustomerModule,
     ProductBranchesModule,
+    CategoryModule,
     StuffModule,
   ],
   controllers: [],
