@@ -15,6 +15,8 @@ import { Customer } from './customer/models/customer.model';
 import { CustomerModule } from './customer/customer.module';
 import { ProductBranchesModule } from './product_branches/product_branches.module';
 import { ProductBranch } from './product_branches/models/product_branch.model';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/model/category.model';
 
 @Module({
   imports: [
@@ -34,6 +36,7 @@ import { ProductBranch } from './product_branches/models/product_branch.model';
         CustomerLocation,
         ProductBranch,
         Customer,
+        Category
       ],
       autoLoadModels: true,
       logging: false,
@@ -45,6 +48,7 @@ import { ProductBranch } from './product_branches/models/product_branch.model';
     CustomerLocationModule,
     CustomerModule,
     ProductBranchesModule,
+    CategoryModule,
   ],
   controllers: [],
   providers: [],
