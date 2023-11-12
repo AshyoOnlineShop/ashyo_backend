@@ -17,6 +17,8 @@ import { ProductBranchesModule } from './product_branches/product_branches.modul
 import { ProductBranch } from './product_branches/models/product_branch.model';
 import { CategoryModule } from './category/category.module';
 import { Category } from './category/model/category.model';
+import { AttributeModule } from './attribute/attribute.module';
+import { Attribute } from './attribute/model/attribute.model';
 
 @Module({
   imports: [
@@ -36,7 +38,8 @@ import { Category } from './category/model/category.model';
         CustomerLocation,
         ProductBranch,
         Customer,
-        Category
+        Category,
+        Attribute
       ],
       autoLoadModels: true,
       logging: false,
@@ -49,6 +52,7 @@ import { Category } from './category/model/category.model';
     CustomerModule,
     ProductBranchesModule,
     CategoryModule,
+    AttributeModule,
   ],
   controllers: [],
   providers: [],
