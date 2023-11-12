@@ -1,3 +1,4 @@
+import { ProductMedia } from './product_media/models/product_media.model';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -21,6 +22,7 @@ import { Stuff } from './stuff/models/stuff.model';
 import { StuffModule } from './stuff/stuff.module';
 import { Product } from './products/models/product.model';
 import { ProductModule } from './products/product.module';
+import { ProductMediaModule } from './product_media/product_media.module';
 
 @Module({
   imports: [
@@ -43,6 +45,7 @@ import { ProductModule } from './products/product.module';
         Category,
         Stuff,
         Product,
+        ProductMedia,
       ],
       autoLoadModels: true,
       logging: false,
@@ -57,6 +60,7 @@ import { ProductModule } from './products/product.module';
     CategoryModule,
     StuffModule,
     ProductModule,
+    ProductMediaModule,
   ],
   controllers: [],
   providers: [],
