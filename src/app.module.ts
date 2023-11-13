@@ -27,6 +27,8 @@ import { ProductInfoModule } from './product-info/product-info.module';
 import { ProductInfo } from './product-info/model/product-info.model';
 import { BrandCategoryModule } from './brand-category/brand-category.module';
 import { BrandCategory } from './brand-category/model/brand-category.model';
+import { SaleProductsModule } from './sale-products/sale-products.module';
+import { SaleProducts } from './sale-products/model/sale-product.model';
 
 @Module({
   imports: [
@@ -51,7 +53,8 @@ import { BrandCategory } from './brand-category/model/brand-category.model';
         Stuff,
         AttributeGroup,
         ProductInfo,
-        BrandCategory
+        BrandCategory,
+        SaleProducts
       ],
       autoLoadModels: true,
       logging: false,
@@ -69,7 +72,8 @@ import { BrandCategory } from './brand-category/model/brand-category.model';
     AttributeGroupModule,
     ProductInfoModule,
     BrandCategoryModule,
-    BrandCategory
+    BrandCategory,
+    SaleProductsModule
   ],
   controllers: [],
   providers: [],
