@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 interface RatingAttrs{
-     id: number;
+ 
      customer_id: number;
      product_id: number;
      rating_value:string;

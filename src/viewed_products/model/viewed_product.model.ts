@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 interface ViewedProductAttrs{
-      id:number;
+
      product_id:number;
      customer_id:number;
      viewed_at:string; 
