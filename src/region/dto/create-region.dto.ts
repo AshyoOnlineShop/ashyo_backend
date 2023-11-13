@@ -3,7 +3,7 @@ import { IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateRegionDto {
   @ApiProperty({
-    example: 'Tashkent',
+    example: 'Tashkente',
     description: 'region name',
   })
   @IsString()
