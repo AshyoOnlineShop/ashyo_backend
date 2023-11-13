@@ -63,7 +63,7 @@ import { PaymentModule } from './payment/payment.module';
         Branch,
         CustomerLocation,
         Customer,
-        Delivery
+        Delivery,
         ProductBranch,
         Category,
         Stuff,
@@ -71,14 +71,14 @@ import { PaymentModule } from './payment/payment.module';
         AttributeGroup,
         ProductInfo,
         BrandCategory,
-        SaleProducts
+        SaleProducts,
         Product,
         ProductMedia,
         Card_types,
         CustomerCard,
         History,
         Order,
-        Payment
+        Payment,
       ],
       autoLoadModels: true,
       logging: false,
@@ -97,14 +97,14 @@ import { PaymentModule } from './payment/payment.module';
     AttributeGroupModule,
     ProductInfoModule,
     BrandCategoryModule,
-    SaleProductsModule
+    SaleProductsModule,
     ProductModule,
     ProductMediaModule,
     Card_typesModule,
     CustomerCardModule,
     HistoryModule,
     OrderModule,
-    PaymentModule
+    PaymentModule,
   ],
   controllers: [],
   providers: [],
