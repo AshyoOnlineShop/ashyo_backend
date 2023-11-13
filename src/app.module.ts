@@ -23,6 +23,16 @@ import { StuffModule } from './stuff/stuff.module';
 import { Product } from './products/models/product.model';
 import { ProductModule } from './products/product.module';
 import { ProductMediaModule } from './product_media/product_media.module';
+import { Card_types } from './card_types/models/card_types.model';
+import { CustomerCard } from './customer_card/models/customer_card.model';
+import { History } from './history/models/history.model';
+import { Order } from './order/models/order.model';
+import { Payment } from './payment/models/payment.model';
+import { Card_typesModule } from './card_types/card_types.module';
+import { CustomerCardModule } from './customer_card/customer_card.module';
+import { HistoryModule } from './history/history.module';
+import { OrderModule } from './order/order.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -46,6 +56,11 @@ import { ProductMediaModule } from './product_media/product_media.module';
         Stuff,
         Product,
         ProductMedia,
+        Card_types,
+        CustomerCard,
+        History,
+        Order,
+        Payment
       ],
       autoLoadModels: true,
       logging: false,
@@ -61,6 +76,11 @@ import { ProductMediaModule } from './product_media/product_media.module';
     StuffModule,
     ProductModule,
     ProductMediaModule,
+    Card_typesModule,
+    CustomerCardModule,
+    HistoryModule,
+    OrderModule,
+    PaymentModule
   ],
   controllers: [],
   providers: [],
