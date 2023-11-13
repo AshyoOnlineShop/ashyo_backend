@@ -8,6 +8,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
+import { Branch } from '../../branches/models/branch.model';
 
 interface AboutShopAttr {
   main_phone: string;
@@ -38,48 +39,67 @@ export class AboutShop extends Model<AboutShop, AboutShopAttr> {
   })
   main_phone: string;
 
-  @ApiProperty({ example: "example@mail.uz", description: 'shop email' })
+  @ApiProperty({ example: 'example@mail.uz', description: 'shop email' })
   @Column({
     type: DataType.STRING,
   })
   email: string;
 
-  @ApiProperty({ example: "This shop sells food", description: 'shop description' })
+  @ApiProperty({
+    example: 'This shop sells food',
+    description: 'shop description',
+  })
   @Column({
     type: DataType.STRING,
   })
   description: string;
 
-  @ApiProperty({ example: "https://instagram.com/", description: 'shop instsagram link' })
+  @ApiProperty({
+    example: 'https://instagram.com/',
+    description: 'shop instsagram link',
+  })
   @Column({
     type: DataType.STRING,
   })
   insta_link: string;
 
-  @ApiProperty({ example: "https://telegram.com/", description: 'shop telegram link' })
+  @ApiProperty({
+    example: 'https://telegram.com/',
+    description: 'shop telegram link',
+  })
   @Column({
     type: DataType.STRING,
   })
   telegram_link: string;
 
-  @ApiProperty({ example: "https://facebook.com/", description: 'shop facebook link' })
+  @ApiProperty({
+    example: 'https://facebook.com/',
+    description: 'shop facebook link',
+  })
   @Column({
     type: DataType.STRING,
   })
   facebook_link: string;
 
-  @ApiProperty({ example: "https://youtube.com/", description: 'shop youtube link' })
+  @ApiProperty({
+    example: 'https://youtube.com/',
+    description: 'shop youtube link',
+  })
   @Column({
     type: DataType.STRING,
   })
   youtube_link: string;
 
-  @ApiProperty({ example: "https://twitter.com/", description: 'shop twitter link' })
+  @ApiProperty({
+    example: 'https://twitter.com/',
+    description: 'shop twitter link',
+  })
   @Column({
     type: DataType.STRING,
   })
   twitter_link: string;
 
-//   @BelongsTo(() => Branches)
-//   branches: Branches;
+  // ======================RELATIONSHIPS=====================================
+  @HasMany(() => Branch)
+  branches: Branch[];
 }

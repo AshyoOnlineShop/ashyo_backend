@@ -9,7 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { District } from '../../district/models/district.model';
 import { Branch } from '../../branches/models/branch.model';
-// import { Customer_location } from '../../district/models/customer_location.model';
+import { CustomerLocation } from './../../customer_location/models/customer_location.model';
 interface RegionAttr {
   name: string;
 }
@@ -24,7 +24,7 @@ export class Region extends Model<Region, RegionAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: 'tashkent', description: 'not null name' })
+  @ApiProperty({ example: 'tashkent', description: 'region name' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -32,15 +32,10 @@ export class Region extends Model<Region, RegionAttr> {
   })
   name: string;
 
-  // @HasMany(() => District)
-  // district: District[];
+  // ======================RELATIONSHIPS=====================================
+  @HasMany(() => CustomerLocation)
+  customer_locations: CustomerLocation[];
 
-  // @HasMany(() => Branch)
-  // branches: Branch[];
-
-  // @BelongsTo(() => Branch)
-  // branches: Branch;
-
-  // @BelongsTo((Customer_location) => )
-  // customer_location: Customer_location;
+  @HasMany(() => District)
+  districts: District[];
 }

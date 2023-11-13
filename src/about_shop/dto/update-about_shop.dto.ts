@@ -1,16 +1,18 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateAboutShopDto } from './create-about_shop.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsEmail, IsUrl } from 'class-validator';
+import { IsString, IsEmail, IsUrl, IsOptional } from 'class-validator';
 
 export class UpdateAboutShopDto extends PartialType(CreateAboutShopDto) {
   @ApiProperty({ example: '+998991234567', description: 'main phone number' })
   @IsString()
+  @IsOptional()
   main_phone?: string;
 
   @ApiProperty({ example: 'example@mail.uz', description: 'shop email' })
   @IsString()
   @IsEmail()
+  @IsOptional()
   email?: string;
 
   @ApiProperty({
@@ -18,6 +20,7 @@ export class UpdateAboutShopDto extends PartialType(CreateAboutShopDto) {
     description: 'shop description',
   })
   @IsString()
+  @IsOptional()
   description?: string;
 
   @ApiProperty({
@@ -26,6 +29,7 @@ export class UpdateAboutShopDto extends PartialType(CreateAboutShopDto) {
   })
   @IsString()
   @IsUrl()
+  @IsOptional()
   insta_link?: string;
 
   @ApiProperty({
@@ -34,6 +38,7 @@ export class UpdateAboutShopDto extends PartialType(CreateAboutShopDto) {
   })
   @IsString()
   @IsUrl()
+  @IsOptional()
   telegram_link?: string;
 
   @ApiProperty({
@@ -42,6 +47,7 @@ export class UpdateAboutShopDto extends PartialType(CreateAboutShopDto) {
   })
   @IsString()
   @IsUrl()
+  @IsOptional()
   facebook_link?: string;
 
   @ApiProperty({
@@ -50,6 +56,7 @@ export class UpdateAboutShopDto extends PartialType(CreateAboutShopDto) {
   })
   @IsString()
   @IsUrl()
+  @IsOptional()
   youtube_link?: string;
 
   @ApiProperty({
@@ -58,5 +65,6 @@ export class UpdateAboutShopDto extends PartialType(CreateAboutShopDto) {
   })
   @IsString()
   @IsUrl()
+  @IsOptional()
   twitter_link?: string;
 }

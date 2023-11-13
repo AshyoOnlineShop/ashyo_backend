@@ -11,6 +11,11 @@ export class CreateCustomerLocationDto {
   @IsNotEmpty()
   customer_id: number;
 
+  @ApiProperty({ example: 1, description: 'region id' })
+  @IsNumber()
+  @IsNotEmpty()
+  region_id: number;
+
   // @ApiProperty({ example: 1.0, description: 'latitude of customer location' })
   // @IsNumber()
   // @IsNotEmpty()

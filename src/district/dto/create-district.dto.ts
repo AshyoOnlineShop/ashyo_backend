@@ -4,7 +4,7 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateDistrictDto {
   @ApiProperty({
     example: 'tashkent',
-    description: 'region name',
+    description: 'district name',
   })
   @IsString()
   @IsNotEmpty()

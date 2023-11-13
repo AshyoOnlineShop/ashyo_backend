@@ -8,6 +8,7 @@ import {
   HasMany,
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
+import { CustomerLocation } from '../../customer_location/models/customer_location.model';
 
 interface CustomerAttr {
   first_name: string;
@@ -95,4 +96,6 @@ export class Customer extends Model<Customer, CustomerAttr> {
   activation_link: string;
 
   //================== Relationships ================================
+  @HasMany(() => CustomerLocation)
+  customer_locations: CustomerLocation[];
 }

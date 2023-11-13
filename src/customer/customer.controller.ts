@@ -22,6 +22,8 @@ import { LoginCustomerDto } from './dto/login-customer.dto';
 import { CookieGetter } from '../decorators/cookieGetter.decorator';
 import { ChangeCustomerPasswordDto } from './dto/change-customer-password.dto';
 import { UpdateCustomerActivenessDto } from './dto/update-customer-activeness.dto';
+import { CustomerSelfGuard } from '../guards/customer.self.guard';
+import { CustomerGuard } from '../guards/customer.guard';
 
 @ApiTags('Customer')
 @Controller('customer')
@@ -34,6 +36,9 @@ export class CustomerController {
     return this.customerService.getAllCustomer();
   }
 
+
+  @UseGuards(CustomerSelfGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Get customer by id' })
   @Get(':id')
   async getCustomerById(@Param('id') id: string) {

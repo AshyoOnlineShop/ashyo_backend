@@ -1,3 +1,4 @@
+import { ProductMedia } from './product_media/models/product_media.model';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -17,6 +18,23 @@ import { ProductBranchesModule } from './product_branches/product_branches.modul
 import { ProductBranch } from './product_branches/models/product_branch.model';
 import { DeliveryModule } from './delivery/delivery.module';
 import { Delivery } from './delivery/models/delivery.model';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/model/category.model';
+import { Stuff } from './stuff/models/stuff.model';
+import { StuffModule } from './stuff/stuff.module';
+import { AttributeModule } from './attribute/attribute.module';
+import { Attribute } from './attribute/model/attribute.model';
+import { AttributeGroupModule } from './attribute-group/attribute-group.module';
+import { AttributeGroup } from './attribute-group/model/attribute-group.model';
+import { ProductInfoModule } from './product-info/product-info.module';
+import { ProductInfo } from './product-info/model/product-info.model';
+import { BrandCategoryModule } from './brand-category/brand-category.module';
+import { BrandCategory } from './brand-category/model/brand-category.model';
+import { SaleProductsModule } from './sale-products/sale-products.module';
+import { SaleProducts } from './sale-products/model/sale-product.model';
+import { Product } from './products/models/product.model';
+import { ProductModule } from './products/product.module';
+import { ProductMediaModule } from './product_media/product_media.module';
 
 @Module({
   imports: [
@@ -34,9 +52,18 @@ import { Delivery } from './delivery/models/delivery.model';
         AboutShop,
         Branch,
         CustomerLocation,
-        ProductBranch,
         Customer,
         Delivery
+        ProductBranch,
+        Category,
+        Stuff,
+        Attribute,
+        AttributeGroup,
+        ProductInfo,
+        BrandCategory,
+        SaleProducts
+        Product,
+        ProductMedia,
       ],
       autoLoadModels: true,
       logging: false,
@@ -49,6 +76,15 @@ import { Delivery } from './delivery/models/delivery.model';
     CustomerModule,
     ProductBranchesModule,
     DeliveryModule,
+    CategoryModule,
+    StuffModule,
+    AttributeModule,
+    AttributeGroupModule,
+    ProductInfoModule,
+    BrandCategoryModule,
+    SaleProductsModule
+    ProductModule,
+    ProductMediaModule,
   ],
   controllers: [],
   providers: [],
