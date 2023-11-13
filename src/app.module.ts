@@ -16,6 +16,8 @@ import { Customer } from './customer/models/customer.model';
 import { CustomerModule } from './customer/customer.module';
 import { ProductBranchesModule } from './product_branches/product_branches.module';
 import { ProductBranch } from './product_branches/models/product_branch.model';
+import { DeliveryModule } from './delivery/delivery.module';
+import { Delivery } from './delivery/models/delivery.model';
 import { CategoryModule } from './category/category.module';
 import { Category } from './category/model/category.model';
 import { Stuff } from './stuff/models/stuff.model';
@@ -51,6 +53,7 @@ import { ProductMediaModule } from './product_media/product_media.module';
         Branch,
         CustomerLocation,
         Customer,
+        Delivery
         ProductBranch,
         Category,
         Stuff,
@@ -72,6 +75,7 @@ import { ProductMediaModule } from './product_media/product_media.module';
     CustomerLocationModule,
     CustomerModule,
     ProductBranchesModule,
+    DeliveryModule,
     CategoryModule,
     StuffModule,
     AttributeModule,
