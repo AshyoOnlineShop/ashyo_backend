@@ -25,6 +25,8 @@ import { AttributeGroupModule } from './attribute-group/attribute-group.module';
 import { AttributeGroup } from './attribute-group/model/attribute-group.model';
 import { ProductInfoModule } from './product-info/product-info.module';
 import { ProductInfo } from './product-info/model/product-info.model';
+import { BrandCategoryModule } from './brand-category/brand-category.module';
+import { BrandCategory } from './brand-category/model/brand-category.model';
 
 @Module({
   imports: [
@@ -46,10 +48,10 @@ import { ProductInfo } from './product-info/model/product-info.model';
         Customer,
         Category,
         Attribute,
-        Category,
         Stuff,
         AttributeGroup,
-        ProductInfo
+        ProductInfo,
+        BrandCategory
       ],
       autoLoadModels: true,
       logging: false,
@@ -66,6 +68,8 @@ import { ProductInfo } from './product-info/model/product-info.model';
     AttributeModule,
     AttributeGroupModule,
     ProductInfoModule,
+    BrandCategoryModule,
+    BrandCategory
   ],
   controllers: [],
   providers: [],
