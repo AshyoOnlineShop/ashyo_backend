@@ -23,6 +23,8 @@ import { AttributeModule } from './attribute/attribute.module';
 import { Attribute } from './attribute/model/attribute.model';
 import { AttributeGroupModule } from './attribute-group/attribute-group.module';
 import { AttributeGroup } from './attribute-group/model/attribute-group.model';
+import { ProductInfoModule } from './product-info/product-info.module';
+import { ProductInfo } from './product-info/model/product-info.model';
 
 @Module({
   imports: [
@@ -46,7 +48,8 @@ import { AttributeGroup } from './attribute-group/model/attribute-group.model';
         Attribute,
         Category,
         Stuff,
-        AttributeGroup
+        AttributeGroup,
+        ProductInfo
       ],
       autoLoadModels: true,
       logging: false,
@@ -62,6 +65,7 @@ import { AttributeGroup } from './attribute-group/model/attribute-group.model';
     StuffModule,
     AttributeModule,
     AttributeGroupModule,
+    ProductInfoModule,
   ],
   controllers: [],
   providers: [],
