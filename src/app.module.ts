@@ -1,3 +1,4 @@
+import { ProductMedia } from './product_media/models/product_media.model';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -29,6 +30,9 @@ import { BrandCategoryModule } from './brand-category/brand-category.module';
 import { BrandCategory } from './brand-category/model/brand-category.model';
 import { SaleProductsModule } from './sale-products/sale-products.module';
 import { SaleProducts } from './sale-products/model/sale-product.model';
+import { Product } from './products/models/product.model';
+import { ProductModule } from './products/product.module';
+import { ProductMediaModule } from './product_media/product_media.module';
 
 @Module({
   imports: [
@@ -46,15 +50,17 @@ import { SaleProducts } from './sale-products/model/sale-product.model';
         AboutShop,
         Branch,
         CustomerLocation,
-        ProductBranch,
         Customer,
+        ProductBranch,
         Category,
-        Attribute,
         Stuff,
+        Attribute,
         AttributeGroup,
         ProductInfo,
         BrandCategory,
         SaleProducts
+        Product,
+        ProductMedia,
       ],
       autoLoadModels: true,
       logging: false,
@@ -72,8 +78,9 @@ import { SaleProducts } from './sale-products/model/sale-product.model';
     AttributeGroupModule,
     ProductInfoModule,
     BrandCategoryModule,
-    BrandCategory,
     SaleProductsModule
+    ProductModule,
+    ProductMediaModule,
   ],
   controllers: [],
   providers: [],

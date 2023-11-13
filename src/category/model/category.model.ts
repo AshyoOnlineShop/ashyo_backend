@@ -7,9 +7,7 @@ import {
   Table,
   ForeignKey,
   BelongsTo,
-  Default,
 } from 'sequelize-typescript';
-// import { Region } from '../../region/model/region.model';
 
 interface CategoryAttr {
   name: string;
@@ -55,3 +53,5 @@ export class Category extends Model<Category, CategoryAttr> {
   })
   parent_category_id: number;
 }
+
+// ======================RELATIONSHIPS=====================================
