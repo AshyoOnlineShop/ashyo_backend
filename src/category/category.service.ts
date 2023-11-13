@@ -10,11 +10,13 @@ export class CategoryService {
   }
 
   async findAll() {
-    return Category.findAll();
+    return Category.findAll({
+      include: { all: true },
+    });
   }
 
   async findOne(id: number) {
-    return await Category.findOne({ where: { id } });
+    return await Category.findOne({ where: { id }, include: { all: true } });
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {

@@ -21,6 +21,8 @@ import { Stuff } from './stuff/models/stuff.model';
 import { StuffModule } from './stuff/stuff.module';
 import { AttributeModule } from './attribute/attribute.module';
 import { Attribute } from './attribute/model/attribute.model';
+import { AttributeGroupModule } from './attribute-group/attribute-group.module';
+import { AttributeGroup } from './attribute-group/model/attribute-group.model';
 
 @Module({
   imports: [
@@ -44,6 +46,7 @@ import { Attribute } from './attribute/model/attribute.model';
         Attribute,
         Category,
         Stuff,
+        AttributeGroup
       ],
       autoLoadModels: true,
       logging: false,
@@ -58,6 +61,7 @@ import { Attribute } from './attribute/model/attribute.model';
     CategoryModule,
     StuffModule,
     AttributeModule,
+    AttributeGroupModule,
   ],
   controllers: [],
   providers: [],

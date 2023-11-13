@@ -10,11 +10,13 @@ export class AttributeService {
   }
 
   async findAll() {
-    return Attribute.findAll();
+    return Attribute.findAll({
+      include: { all: true },
+    });
   }
 
   async findOne(id: number) {
-    return await Attribute.findOne({ where: { id } });
+    return await Attribute.findOne({ where: { id }, include: { all: true } });
   }
 
   async update(id: number, updateAttributeDto: UpdateAttributeDto) {
