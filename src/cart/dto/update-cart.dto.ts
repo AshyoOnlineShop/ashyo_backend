@@ -6,20 +6,20 @@ export class UpdateCartDto extends PartialType(CreateCartDto) {
   @ApiProperty({ example: 1, description: 'customer id' })
   @IsOptional()
   @IsNumber()
-  customer_id: number;
+  customer_id?: number;
 
   @ApiProperty({ example: 1, description: 'product id' })
   @IsOptional()
   @IsNumber()
-  product_id: number;
+  product_id?: number;
 
   @ApiProperty({ example: 5, description: 'product quantity' })
   @IsOptional()
   @IsNumber()
-  quantity: number;
+  quantity?: number;
 
   @ApiProperty({ example: false, description: 'product status' })
   @IsOptional()
   @IsBoolean()
-  status: boolean;
+  status?: boolean;
 }

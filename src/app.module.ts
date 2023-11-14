@@ -47,7 +47,8 @@ import { OrderModule } from './order/order.module';
 import { PaymentModule } from './payment/payment.module';
 import { Cart } from './cart/models/cart.model';
 import { CartModule } from './cart/cart.module';
-
+import { ProductModel } from './product_model/models/product_model.model';
+import { ProductModelModule } from './product_model/product_model.module';
 
 @Module({
   imports: [
@@ -82,7 +83,8 @@ import { CartModule } from './cart/cart.module';
         History,
         Order,
         Payment,
-        Cart
+        Cart,
+        ProductModel,
       ],
       autoLoadModels: true,
       logging: false,
@@ -109,7 +111,8 @@ import { CartModule } from './cart/cart.module';
     HistoryModule,
     OrderModule,
     PaymentModule,
-    CartModule
+    CartModule,
+    ProductModelModule,
   ],
   controllers: [],
   providers: [],
