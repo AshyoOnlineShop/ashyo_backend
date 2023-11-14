@@ -32,12 +32,16 @@ export class ProductInfo extends Model<ProductInfo, ProductInfoAttr> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   product_id: number;
 
   @ApiProperty({ example: 1, description: 'Attribute id' })
   @Column({
     type: DataType.INTEGER,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   attribute_id: number;
 

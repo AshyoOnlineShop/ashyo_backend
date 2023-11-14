@@ -30,30 +30,41 @@ export class Order extends Model<Order, OrderAttr> {
   @ApiProperty({ example: 1, description: 'customer id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   customer_id: number;
 
   @ApiProperty({ example: 1, description: 'customer location id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   customer_location_id: number;
 
   @ApiProperty({ example: 1, description: 'payment id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   payment_id: number;
 
   @ApiProperty({ example: '2023-11-12', description: 'ordering date' })
   @Column({
     type: DataType.STRING,
+    allowNull: false,
   })
   ordering_date: string;
 
   @ApiProperty({ example: true, description: 'order status' })
   @Column({
     type: DataType.BOOLEAN,
+    defaultValue: false,
   })
   status: boolean;
 }

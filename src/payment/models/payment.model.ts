@@ -31,24 +31,32 @@ export class Payment extends Model<Payment, PaymentAttr> {
   @ApiProperty({ example: 1, description: 'card id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   card_id: number;
 
   @ApiProperty({ example: 1, description: 'customer card id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   customer_card_id: number;
 
   @ApiProperty({ example: true, description: 'payment type' })
   @Column({
     type: DataType.BOOLEAN,
+    allowNull: false
   })
   payment_type: boolean;
 
   @ApiProperty({ example: '2023-11-12', description: 'payment date' })
   @Column({
     type: DataType.STRING,
+    allowNull: false
   })
   payment_date: string;
 

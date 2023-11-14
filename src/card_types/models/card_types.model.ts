@@ -59,3 +59,4 @@ export class  Card_types extends Model< Card_types, CardTypeAttr> {
 }
 
 // ---------------------------Relationships-------------------------------------
+

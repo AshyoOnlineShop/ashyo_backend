@@ -7,12 +7,15 @@ import {
   Table,
   ForeignKey,
   BelongsTo,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import { BrandCategory } from '../../brand-category/model/brand-category.model';
+import { Category } from '../../category/model/category.model';
 
 interface BrandAttr {
-  name: string
-  image: string
-  position: number
+  name: string;
+  image: string;
+  position: number;
 }
 
 @Table({ tableName: 'brand' })
@@ -47,5 +50,6 @@ export class Brand extends Model<Brand, BrandAttr> {
   position: number;
 
   //================== Relationships ================================
-  
+  @BelongsToMany(() => Category, () => BrandCategory)
+  categories: Category[];
 }

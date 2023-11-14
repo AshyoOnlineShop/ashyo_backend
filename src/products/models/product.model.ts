@@ -7,7 +7,11 @@ import {
   Table,
   ForeignKey,
   BelongsTo,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import { ProductBranch } from '../../product_branches/models/product_branch.model';
+import { Branch } from '../../branches/models/branch.model';
+import { Cart } from '../../cart/models/cart.model';
 
 interface ProductAttr {
   name: string;
@@ -57,6 +61,8 @@ export class Product extends Model<Product, ProductAttr> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   category_id: number;
 
@@ -64,6 +70,8 @@ export class Product extends Model<Product, ProductAttr> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   model_id: number;
 
@@ -71,6 +79,8 @@ export class Product extends Model<Product, ProductAttr> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   brand_id: number;
 
@@ -82,4 +92,9 @@ export class Product extends Model<Product, ProductAttr> {
   quantity: number;
 
   //================== Relationships ================================
+  @BelongsToMany(() => Branch, () => ProductBranch)
+  branches: Branch[];
+
+  @HasMany(() => Cart)
+  carts: Cart[];
 }

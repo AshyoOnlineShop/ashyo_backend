@@ -27,12 +27,13 @@ export class CustomerCard extends Model<CustomerCard, CustomerCardAttr> {
   id: number;
 
   @ApiProperty({ example: 1, description: 'Customer Id' })
-  // @ForeignKey(() => Customer)
-  @Column({ type: DataType.INTEGER, allowNull: false })
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   customer_id: number;
-
-  // @BelongsTo(() => Customer)
-  // customer: Customer;
 
   @ApiProperty({ example: 123456789, description: 'Card Number' })
   @Column({ type: DataType.INTEGER, allowNull: false })
@@ -47,12 +48,13 @@ export class CustomerCard extends Model<CustomerCard, CustomerCardAttr> {
   expiration_date: string;
 
   @ApiProperty({ example: 1, description: 'Card Type Id' })
-  // @ForeignKey(() => Card_types)
-  @Column({ type: DataType.INTEGER, allowNull: false })
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   card_type_id: number;
-
-  // @BelongsTo(() => Card_types)
-  // card_type: Card_types;
 
   @ApiProperty({ example: '2023-11-12', description: 'last_used' })
   @Column({ type: DataType.STRING, allowNull: false })

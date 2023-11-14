@@ -38,6 +38,8 @@ export class ProductModel extends Model<ProductModel, ProductModelAttr> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   brand_category_id: number;
 

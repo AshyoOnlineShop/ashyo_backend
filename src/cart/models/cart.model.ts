@@ -8,6 +8,8 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
+import { Customer } from '../../customer/models/customer.model';
+import { Product } from '../../products/models/product.model';
 
 interface CartAttr {
   customer_id: number;
@@ -26,17 +28,23 @@ export class Cart extends Model<Cart, CartAttr> {
   })
   id: number;
 
+  @ForeignKey(() => Customer)
   @ApiProperty({ example: 1, description: 'customer id' })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   customer_id: number;
 
+  @ForeignKey(() => Product)
   @ApiProperty({ example: 1, description: 'product id' })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   product_id: number;
 
@@ -56,4 +64,9 @@ export class Cart extends Model<Cart, CartAttr> {
   status: boolean;
 
   //================== Relationships ================================
+  @BelongsTo(() => Customer)
+  customer: Customer;
+
+  @BelongsTo(() => Product)
+  product: Product;
 }

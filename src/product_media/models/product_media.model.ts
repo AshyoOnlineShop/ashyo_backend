@@ -29,6 +29,8 @@ export class ProductMedia extends Model<ProductMedia, ProductMediaAttr> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   product_id: number;
 

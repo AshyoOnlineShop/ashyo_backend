@@ -24,6 +24,8 @@ export class SaleProducts extends Model<SaleProducts, SaleProductsAttr> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   product_model_id: number;
 

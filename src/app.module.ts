@@ -51,6 +51,14 @@ import { ProductModel } from './product_model/models/product_model.model';
 import { ProductModelModule } from './product_model/product_model.module';
 import { Brand } from './brands/models/brands.model';
 import { BrandModule } from './brands/brands.module';
+import { LikedProduct } from './liked_products/model/liked_product.entity';
+import { ViewedProduct } from './viewed_products/model/viewed_product.model';
+import { Comment } from './comments/model/comment.model';
+import { Rating } from './rating/model/rating.model';
+import { CommentsModule } from './comments/comments.module';
+import { RatingModule } from './rating/rating.module';
+import { ViewedProductsModule } from './viewed_products/viewed_products.module';
+import { LikedProductsModule } from './liked_products/liked_products.module';
 
 @Module({
   imports: [
@@ -88,6 +96,10 @@ import { BrandModule } from './brands/brands.module';
         Cart,
         ProductModel,
         Brand,
+        LikedProduct,
+        ViewedProduct,
+        Comment,
+        Rating,
       ],
       autoLoadModels: true,
       logging: false,
@@ -117,6 +129,10 @@ import { BrandModule } from './brands/brands.module';
     CartModule,
     ProductModelModule,
     BrandModule,
+    CommentsModule,
+    RatingModule,
+    ViewedProductsModule,
+    LikedProductsModule,
   ],
   controllers: [],
   providers: [],

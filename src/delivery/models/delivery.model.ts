@@ -27,6 +27,8 @@ export class Delivery extends Model<Delivery, DeliveryAttributes> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   order_id: number;
 
@@ -34,6 +36,8 @@ export class Delivery extends Model<Delivery, DeliveryAttributes> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   deliver_id: number;
 

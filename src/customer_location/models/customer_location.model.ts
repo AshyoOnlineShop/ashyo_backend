@@ -36,6 +36,9 @@ export class CustomerLocation extends Model<
   @ApiProperty({ example: 1, description: 'customer id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   customer_id: number;
 
@@ -43,6 +46,9 @@ export class CustomerLocation extends Model<
   @ApiProperty({ example: 1, description: 'region id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   region_id: number;
 
@@ -60,7 +66,8 @@ export class CustomerLocation extends Model<
 
   @ApiProperty({ example: 1, description: 'details of customer location' })
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
+    allowNull: false,
   })
   details: string;
 

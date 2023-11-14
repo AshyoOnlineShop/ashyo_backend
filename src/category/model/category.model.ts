@@ -2,12 +2,16 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   DataType,
-  HasMany,
   Model,
   Table,
   ForeignKey,
   BelongsTo,
+  HasMany,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import { AttributeGroup } from '../../attribute-group/model/attribute-group.model';
+import { BrandCategory } from '../../brand-category/model/brand-category.model';
+import { Brand } from '../../brands/models/brands.model';
 
 interface CategoryAttr {
   name: string;
@@ -50,8 +54,15 @@ export class Category extends Model<Category, CategoryAttr> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   parent_category_id: number;
-}
 
-// ======================RELATIONSHIPS=====================================
+  // ======================RELATIONSHIPS=====================================
+  @HasMany(() => AttributeGroup)
+  attribute_groups: AttributeGroup[];
+
+  @BelongsToMany(() => Brand, () => BrandCategory)
+  brands: Brand[];
+}

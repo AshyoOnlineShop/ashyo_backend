@@ -28,18 +28,25 @@ export class History extends Model<History, HistoryAttr> {
   @ApiProperty({ example: 1, description: 'customer id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   customer_id: number;
 
   @ApiProperty({ example: 1, description: 'order id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   order_id: number;
 
   @ApiProperty({ example: '2023-11-12', description: 'delivered date' })
   @Column({
     type: DataType.STRING,
+    allowNull: false,
   })
   delivered_date: string;
 }
