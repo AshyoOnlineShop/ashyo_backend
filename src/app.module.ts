@@ -49,6 +49,8 @@ import { Cart } from './cart/models/cart.model';
 import { CartModule } from './cart/cart.module';
 import { ProductModel } from './product_model/models/product_model.model';
 import { ProductModelModule } from './product_model/product_model.module';
+import { Brand } from './brands/models/brands.model';
+import { BrandModule } from './brands/brands.module';
 
 @Module({
   imports: [
@@ -85,6 +87,7 @@ import { ProductModelModule } from './product_model/product_model.module';
         Payment,
         Cart,
         ProductModel,
+        Brand,
       ],
       autoLoadModels: true,
       logging: false,
@@ -113,6 +116,7 @@ import { ProductModelModule } from './product_model/product_model.module';
     PaymentModule,
     CartModule,
     ProductModelModule,
+    BrandModule,
   ],
   controllers: [],
   providers: [],
