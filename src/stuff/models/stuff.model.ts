@@ -9,6 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
 import { Delivery } from '../../delivery/models/delivery.model';
+import { AdminCustomer } from '../../admin_customer/models/admin_customer.model';
 
 interface StuffAttr {
   first_name: string;
@@ -114,4 +115,7 @@ export class Stuff extends Model<Stuff, StuffAttr> {
   //================== Relationships ================================
   @HasMany(() => Delivery)
   deliveries: Delivery[];
+
+  @HasMany(() => AdminCustomer)
+  admin_customer_messages: AdminCustomer[];
 }

@@ -17,6 +17,7 @@ import { LikedProduct } from '../../liked_products/models/liked_product.model';
 import { Order } from '../../order/models/order.model';
 import { Rating } from '../../rating/models/rating.model';
 import { ViewedProduct } from '../../viewed_products/models/viewed_product.model';
+import { AdminCustomer } from '../../admin_customer/models/admin_customer.model';
 
 interface CustomerAttr {
   first_name: string;
@@ -127,6 +128,9 @@ export class Customer extends Model<Customer, CustomerAttr> {
 
   @HasMany(() => Order)
   orders: Order[];
+
+  @HasMany(() => AdminCustomer)
+  admin_customer_messages: AdminCustomer[];
 
   @HasMany(() => ViewedProduct)
   viewed_products: ViewedProduct[];

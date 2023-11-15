@@ -59,6 +59,8 @@ import { CommentsModule } from './comments/comments.module';
 import { RatingModule } from './rating/rating.module';
 import { ViewedProductsModule } from './viewed_products/viewed_products.module';
 import { LikedProductsModule } from './liked_products/liked_products.module';
+import { AdminCustomer } from './admin_customer/models/admin_customer.model';
+import { AdminCustomerModule } from './admin_customer/admin_customer.module';
 
 @Module({
   imports: [
@@ -100,6 +102,7 @@ import { LikedProductsModule } from './liked_products/liked_products.module';
         ViewedProduct,
         Comment,
         Rating,
+        AdminCustomer,
       ],
       autoLoadModels: true,
       logging: false,
@@ -133,6 +136,7 @@ import { LikedProductsModule } from './liked_products/liked_products.module';
     RatingModule,
     ViewedProductsModule,
     LikedProductsModule,
+    AdminCustomerModule,
   ],
   controllers: [],
   providers: [],
