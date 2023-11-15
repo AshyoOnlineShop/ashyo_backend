@@ -10,6 +10,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { Customer } from '../../customer/models/customer.model';
 import { Card_types } from '../../card_types/models/card_types.model';
+import { Payment } from '../../payment/models/payment.model';
 
 interface CustomerCardAttr {
   customer_id: number;
@@ -26,6 +27,7 @@ export class CustomerCard extends Model<CustomerCard, CustomerCardAttr> {
   @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
   id: number;
 
+  @ForeignKey(() => Customer)
   @ApiProperty({ example: 1, description: 'Customer Id' })
   @Column({
     type: DataType.INTEGER,
@@ -47,6 +49,7 @@ export class CustomerCard extends Model<CustomerCard, CustomerCardAttr> {
   @Column({ type: DataType.STRING, allowNull: false })
   expiration_date: string;
 
+  @ForeignKey(() => Card_types)
   @ApiProperty({ example: 1, description: 'Card Type Id' })
   @Column({
     type: DataType.INTEGER,
@@ -59,4 +62,14 @@ export class CustomerCard extends Model<CustomerCard, CustomerCardAttr> {
   @ApiProperty({ example: '2023-11-12', description: 'last_used' })
   @Column({ type: DataType.STRING, allowNull: false })
   last_used: string;
+
+  //================== Relationships ================================
+  @BelongsTo(() => Customer)
+  customer: Customer;
+
+  @BelongsTo(() => Card_types)
+  card_type: Card_types;
+
+  @HasMany(() => Payment)
+  payments: Payment[];
 }

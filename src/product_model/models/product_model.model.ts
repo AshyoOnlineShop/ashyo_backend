@@ -8,6 +8,9 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
+import { BrandCategory } from '../../brand-category/model/brand-category.model';
+import { Product } from '../../products/models/product.model';
+import { SaleProducts } from '../../sale-products/model/sale-product.model';
 
 interface ProductModelAttr {
   name: string;
@@ -34,6 +37,7 @@ export class ProductModel extends Model<ProductModel, ProductModelAttr> {
   })
   name: string;
 
+  @ForeignKey(() => BrandCategory)
   @ApiProperty({ example: 1, description: 'brand category id' })
   @Column({
     type: DataType.INTEGER,
@@ -44,4 +48,12 @@ export class ProductModel extends Model<ProductModel, ProductModelAttr> {
   brand_category_id: number;
 
   //================== Relationships ================================
+  @BelongsTo(() => BrandCategory)
+  brand_category: BrandCategory;
+
+  @HasMany(() => Product)
+  product: Product[];
+
+  @HasMany(() => SaleProducts)
+  sale_products: SaleProducts[];
 }

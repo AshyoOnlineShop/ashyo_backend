@@ -1,11 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString, IsNotEmpty, IsBoolean } from 'class-validator';
+import {
+  IsNumber,
+  IsString,
+  IsNotEmpty,
+  IsBoolean,
+  IsDate,
+} from 'class-validator';
 
 export class CreatePaymentDto {
   @ApiProperty({ example: 1, description: 'card id' })
   @IsNumber()
   @IsNotEmpty()
-  card_id: number;
+  cart_id: number;
 
   @ApiProperty({ example: 1, description: 'customer card id' })
   @IsNumber()
@@ -18,9 +24,9 @@ export class CreatePaymentDto {
   payment_type: boolean;
 
   @ApiProperty({ example: '2023-11-12', description: 'payment date' })
-  @IsString()
+  @IsDate()
   @IsNotEmpty()
-  payment_date: string;
+  payment_date: Date;
 
   @ApiProperty({ example: 100.5, description: 'total price' })
   @IsNumber()

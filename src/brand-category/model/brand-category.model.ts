@@ -3,11 +3,13 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { Brand } from '../../brands/models/brands.model';
 import { Category } from '../../category/model/category.model';
+import { ProductModel } from '../../product_model/models/product_model.model';
 
 interface BrandCategoryAttr {
   brand_id: number;
@@ -45,5 +47,6 @@ export class BrandCategory extends Model<BrandCategory, BrandCategoryAttr> {
   category_id: number;
 
   // ======================RELATIONSHIPS=====================================
- 
+  @HasMany(() => ProductModel)
+  product_models: ProductModel[];
 }

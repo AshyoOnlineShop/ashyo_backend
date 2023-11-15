@@ -10,6 +10,7 @@ import {
 } from 'sequelize-typescript';
 import { Customer } from '../../customer/models/customer.model';
 import { Region } from '../../region/models/region.model';
+import { Order } from '../../order/models/order.model';
 
 interface CustomerLocationAttr {
   customer_id: number;
@@ -77,4 +78,7 @@ export class CustomerLocation extends Model<
 
   @BelongsTo(() => Region)
   region: Region;
+
+  @HasMany(() => Order)
+  orders: Order[];
 }

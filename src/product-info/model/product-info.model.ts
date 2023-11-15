@@ -9,7 +9,8 @@ import {
   BelongsTo,
   Default,
 } from 'sequelize-typescript';
-// import { Region } from '../../region/model/region.model';
+import { Product } from '../../products/models/product.model';
+import { Attribute } from '../../attribute/model/attribute.model';
 
 interface ProductInfoAttr {
   product_id: number;
@@ -28,6 +29,7 @@ export class ProductInfo extends Model<ProductInfo, ProductInfoAttr> {
   })
   id: number;
 
+  @ForeignKey(() => Product)
   @ApiProperty({ example: 1, description: 'Product id' })
   @Column({
     type: DataType.INTEGER,
@@ -37,6 +39,7 @@ export class ProductInfo extends Model<ProductInfo, ProductInfoAttr> {
   })
   product_id: number;
 
+  @ForeignKey(() => Attribute)
   @ApiProperty({ example: 1, description: 'Attribute id' })
   @Column({
     type: DataType.INTEGER,
@@ -58,4 +61,11 @@ export class ProductInfo extends Model<ProductInfo, ProductInfoAttr> {
     allowNull: false,
   })
   show_in_main: boolean;
+
+  //================== Relationships ================================
+  @BelongsTo(() => Product)
+  product: Product;
+
+  @BelongsTo(() => Attribute)
+  attribute: Attribute;
 }

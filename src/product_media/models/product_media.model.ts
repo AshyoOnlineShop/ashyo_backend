@@ -8,6 +8,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
+import { Product } from '../../products/models/product.model';
 
 interface ProductMediaAttr {
   product_id: number;
@@ -25,6 +26,7 @@ export class ProductMedia extends Model<ProductMedia, ProductMediaAttr> {
   })
   id: number;
 
+  @ForeignKey(() => Product)
   @ApiProperty({ example: 1, description: 'product id' })
   @Column({
     type: DataType.INTEGER,
@@ -52,4 +54,6 @@ export class ProductMedia extends Model<ProductMedia, ProductMediaAttr> {
   type: string;
 
   //================== Relationships ================================
+  @BelongsTo(() => Product)
+  product: Product;
 }

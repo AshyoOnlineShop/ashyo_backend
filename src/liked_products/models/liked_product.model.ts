@@ -1,5 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Product } from '../../products/models/product.model';
+import { Customer } from '../../customer/models/customer.model';
 
 interface LikedProductAttrs {
   product_id: number;
@@ -15,6 +24,7 @@ export class LikedProduct extends Model<LikedProduct, LikedProductAttrs> {
   })
   id: number;
 
+  @ForeignKey(() => Product)
   @ApiProperty({ example: 1, description: 'Product id' })
   @Column({
     type: DataType.INTEGER,
@@ -24,6 +34,7 @@ export class LikedProduct extends Model<LikedProduct, LikedProductAttrs> {
   })
   product_id: number;
 
+  @ForeignKey(() => Customer)
   @ApiProperty({ example: 1, description: 'Customer id' })
   @Column({
     type: DataType.INTEGER,
@@ -32,4 +43,11 @@ export class LikedProduct extends Model<LikedProduct, LikedProductAttrs> {
     onUpdate: 'CASCADE',
   })
   customer_id: number;
+
+  //================== Relationships ================================
+  @BelongsTo(() => Product)
+  product: Product;
+
+  @BelongsTo(() => Customer)
+  customer: Customer;
 }

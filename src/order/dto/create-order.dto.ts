@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString, IsNotEmpty, IsBoolean } from 'class-validator';
+import { IsNumber, IsString, IsNotEmpty, IsBoolean, IsDate } from 'class-validator';
 
 export class CreateOrderDto {
   @ApiProperty({ example: 1, description: 'customer id' })
@@ -18,9 +18,9 @@ export class CreateOrderDto {
   payment_id: number;
 
   @ApiProperty({ example: '2023-11-12', description: 'ordering date' })
-  @IsString()
+  @IsDate()
   @IsNotEmpty()
-  ordering_date: string;
+  ordering_date: Date;
 
   @ApiProperty({ example: true, description: 'order status' })
   @IsBoolean()

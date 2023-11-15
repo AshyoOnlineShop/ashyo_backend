@@ -8,6 +8,7 @@ import {
   HasMany,
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
+import { Delivery } from '../../delivery/models/delivery.model';
 
 interface StuffAttr {
   first_name: string;
@@ -111,4 +112,6 @@ export class Stuff extends Model<Stuff, StuffAttr> {
   activation_link: string;
 
   //================== Relationships ================================
+  @HasMany(() => Delivery)
+  deliveries: Delivery[];
 }

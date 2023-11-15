@@ -10,6 +10,7 @@ import {
 } from 'sequelize-typescript';
 import { Customer } from '../../customer/models/customer.model';
 import { Product } from '../../products/models/product.model';
+import { Payment } from '../../payment/models/payment.model';
 
 interface CartAttr {
   customer_id: number;
@@ -69,4 +70,7 @@ export class Cart extends Model<Cart, CartAttr> {
 
   @BelongsTo(() => Product)
   product: Product;
+
+  @HasMany(() => Payment)
+  payments: Payment[];
 }

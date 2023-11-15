@@ -11,6 +11,7 @@ import {
 } from 'sequelize-typescript';
 import { BrandCategory } from '../../brand-category/model/brand-category.model';
 import { Category } from '../../category/model/category.model';
+import { Product } from '../../products/models/product.model';
 
 interface BrandAttr {
   name: string;
@@ -52,4 +53,7 @@ export class Brand extends Model<Brand, BrandAttr> {
   //================== Relationships ================================
   @BelongsToMany(() => Category, () => BrandCategory)
   categories: Category[];
+
+  @HasMany(() => Product)
+  product: Product[];
 }

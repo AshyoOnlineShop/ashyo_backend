@@ -8,6 +8,7 @@ import {
   HasMany,
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
+import { CustomerCard } from '../../customer_card/models/customer_card.model';
 
 interface CardTypeAttr {
   name: string;
@@ -17,7 +18,7 @@ interface CardTypeAttr {
 }
 
 @Table({ tableName: 'card_types' })
-export class  Card_types extends Model< Card_types, CardTypeAttr> {
+export class Card_types extends Model<Card_types, CardTypeAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
     type: DataType.INTEGER,
@@ -26,7 +27,7 @@ export class  Card_types extends Model< Card_types, CardTypeAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: "Humo", description: 'Card Type name' })
+  @ApiProperty({ example: 'Humo', description: 'Card Type name' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -56,7 +57,8 @@ export class  Card_types extends Model< Card_types, CardTypeAttr> {
     allowNull: false,
   })
   position: number;
+
+  // ---------------------------Relationships-------------------------------------
+  @HasMany(() => CustomerCard)
+  customer_cards: CustomerCard[];
 }
-
-// ---------------------------Relationships-------------------------------------
-

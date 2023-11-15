@@ -10,6 +10,7 @@ import {
   Default,
 } from 'sequelize-typescript';
 import { AttributeGroup } from '../../attribute-group/model/attribute-group.model';
+import { ProductInfo } from '../../product-info/model/product-info.model';
 
 interface AttributeAttr {
   name: string;
@@ -53,4 +54,7 @@ export class Attribute extends Model<Attribute, AttributeAttr> {
   //================== Relationships ================================
   @BelongsTo(() => AttributeGroup)
   attribute_group: AttributeGroup;
+
+  @HasMany(() => ProductInfo)
+  product_infos: ProductInfo[];
 }

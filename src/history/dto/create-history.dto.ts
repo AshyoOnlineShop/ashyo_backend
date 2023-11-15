@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString, IsNotEmpty } from 'class-validator';
+import { IsNumber, IsString, IsNotEmpty, IsDate } from 'class-validator';
 
 export class CreateHistoryDto {
   @ApiProperty({ example: 1, description: 'customer id' })
@@ -13,8 +13,8 @@ export class CreateHistoryDto {
   order_id: number;
 
   @ApiProperty({ example: '2023-11-12', description: 'delivered date' })
-  @IsString()
+  @IsDate()
   @IsNotEmpty()
-  delivered_date: string;
+  delivered_date: Date;
 
 }

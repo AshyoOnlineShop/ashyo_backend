@@ -8,12 +8,15 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
+import { Order } from '../../order/models/order.model';
+import { Cart } from '../../cart/models/cart.model';
+import { CustomerCard } from '../../customer_card/models/customer_card.model';
 
 interface PaymentAttr {
-  card_id: number;
+  cart_id: number;
   customer_card_id: number;
   payment_type: boolean;
-  payment_date: string;
+  payment_date: Date;
   total_price: number;
   status: boolean;
 }
@@ -28,6 +31,7 @@ export class Payment extends Model<Payment, PaymentAttr> {
   })
   id: number;
 
+  @ForeignKey(() => Cart)
   @ApiProperty({ example: 1, description: 'card id' })
   @Column({
     type: DataType.INTEGER,
@@ -35,8 +39,9 @@ export class Payment extends Model<Payment, PaymentAttr> {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  card_id: number;
+  cart_id: number;
 
+  @ForeignKey(() => CustomerCard)
   @ApiProperty({ example: 1, description: 'customer card id' })
   @Column({
     type: DataType.INTEGER,
@@ -49,16 +54,16 @@ export class Payment extends Model<Payment, PaymentAttr> {
   @ApiProperty({ example: true, description: 'payment type' })
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   })
   payment_type: boolean;
 
   @ApiProperty({ example: '2023-11-12', description: 'payment date' })
   @Column({
-    type: DataType.STRING,
-    allowNull: false
+    type: DataType.DATE,
+    allowNull: false,
   })
-  payment_date: string;
+  payment_date: Date;
 
   @ApiProperty({ example: 100.5, description: 'total price' })
   @Column({
@@ -71,4 +76,14 @@ export class Payment extends Model<Payment, PaymentAttr> {
     type: DataType.BOOLEAN,
   })
   status: boolean;
+
+  // ======================RELATIONSHIPS=====================================
+  @HasMany(() => Order)
+  orders: Order[];
+
+  @BelongsTo(() => Cart)
+  cart: Cart;
+
+  @BelongsTo(() => CustomerCard)
+  customer_card: CustomerCard;
 }
