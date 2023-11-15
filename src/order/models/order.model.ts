@@ -18,7 +18,7 @@ interface OrderAttr {
   customer_id: number;
   customer_location_id: number;
   payment_id: number;
-  ordering_date: string;
+  ordering_date: Date;
   status: boolean;
 }
 
