@@ -9,6 +9,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Branch } from '../../branches/models/branch.model';
+import { Product } from '../../products/models/product.model';
 interface ProductBranchAttr {
   product_id: number;
   branch_id: number;
@@ -24,10 +25,13 @@ export class ProductBranch extends Model<ProductBranch, ProductBranchAttr> {
   })
   id: number;
 
-  // @ForeignKey(() => Product)
+  @ForeignKey(() => Product)
   @ApiProperty({ example: 1, description: 'product id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   product_id: number;
 
@@ -35,9 +39,11 @@ export class ProductBranch extends Model<ProductBranch, ProductBranchAttr> {
   @ApiProperty({ example: 1, description: 'branch id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   branch_id: number;
 
   //================== Relationships ================================
-
 }

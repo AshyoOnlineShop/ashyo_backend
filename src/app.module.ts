@@ -16,6 +16,8 @@ import { Customer } from './customer/models/customer.model';
 import { CustomerModule } from './customer/customer.module';
 import { ProductBranchesModule } from './product_branches/product_branches.module';
 import { ProductBranch } from './product_branches/models/product_branch.model';
+import { DeliveryModule } from './delivery/delivery.module';
+import { Delivery } from './delivery/models/delivery.model';
 import { CategoryModule } from './category/category.module';
 import { Category } from './category/model/category.model';
 import { Stuff } from './stuff/models/stuff.model';
@@ -33,6 +35,32 @@ import { SaleProducts } from './sale-products/model/sale-product.model';
 import { Product } from './products/models/product.model';
 import { ProductModule } from './products/product.module';
 import { ProductMediaModule } from './product_media/product_media.module';
+import { Card_types } from './card_types/models/card_types.model';
+import { CustomerCard } from './customer_card/models/customer_card.model';
+import { History } from './history/models/history.model';
+import { Order } from './order/models/order.model';
+import { Payment } from './payment/models/payment.model';
+import { Card_typesModule } from './card_types/card_types.module';
+import { CustomerCardModule } from './customer_card/customer_card.module';
+import { HistoryModule } from './history/history.module';
+import { OrderModule } from './order/order.module';
+import { PaymentModule } from './payment/payment.module';
+import { Cart } from './cart/models/cart.model';
+import { CartModule } from './cart/cart.module';
+import { ProductModel } from './product_model/models/product_model.model';
+import { ProductModelModule } from './product_model/product_model.module';
+import { Brand } from './brands/models/brands.model';
+import { BrandModule } from './brands/brands.module';
+import { LikedProduct } from './liked_products/models/liked_product.model';
+import { ViewedProduct } from './viewed_products/models/viewed_product.model';
+import { Comment } from './comments/models/comment.model';
+import { Rating } from './rating/models/rating.model';
+import { CommentsModule } from './comments/comments.module';
+import { RatingModule } from './rating/rating.module';
+import { ViewedProductsModule } from './viewed_products/viewed_products.module';
+import { LikedProductsModule } from './liked_products/liked_products.module';
+import { AdminCustomer } from './admin_customer/models/admin_customer.model';
+import { AdminCustomerModule } from './admin_customer/admin_customer.module';
 
 @Module({
   imports: [
@@ -51,6 +79,7 @@ import { ProductMediaModule } from './product_media/product_media.module';
         Branch,
         CustomerLocation,
         Customer,
+        Delivery,
         ProductBranch,
         Category,
         Stuff,
@@ -61,6 +90,19 @@ import { ProductMediaModule } from './product_media/product_media.module';
         SaleProducts,
         Product,
         ProductMedia,
+        Card_types,
+        CustomerCard,
+        History,
+        Order,
+        Payment,
+        Cart,
+        ProductModel,
+        Brand,
+        LikedProduct,
+        ViewedProduct,
+        Comment,
+        Rating,
+        AdminCustomer,
       ],
       autoLoadModels: true,
       logging: false,
@@ -72,6 +114,7 @@ import { ProductMediaModule } from './product_media/product_media.module';
     CustomerLocationModule,
     CustomerModule,
     ProductBranchesModule,
+    DeliveryModule,
     CategoryModule,
     StuffModule,
     AttributeModule,
@@ -81,6 +124,19 @@ import { ProductMediaModule } from './product_media/product_media.module';
     SaleProductsModule,
     ProductModule,
     ProductMediaModule,
+    Card_typesModule,
+    CustomerCardModule,
+    HistoryModule,
+    OrderModule,
+    PaymentModule,
+    CartModule,
+    ProductModelModule,
+    BrandModule,
+    CommentsModule,
+    RatingModule,
+    ViewedProductsModule,
+    LikedProductsModule,
+    AdminCustomerModule,
   ],
   controllers: [],
   providers: [],

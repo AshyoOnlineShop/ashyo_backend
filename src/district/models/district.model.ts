@@ -37,6 +37,9 @@ export class District extends Model<District, DistrictAttr> {
   @ApiProperty({ example: 1, description: 'region id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   region_id: number;
 

@@ -7,7 +7,20 @@ import {
   Table,
   ForeignKey,
   BelongsTo,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import { ProductBranch } from '../../product_branches/models/product_branch.model';
+import { Branch } from '../../branches/models/branch.model';
+import { Cart } from '../../cart/models/cart.model';
+import { Comment } from '../../comments/models/comment.model';
+import { LikedProduct } from '../../liked_products/models/liked_product.model';
+import { ProductMedia } from '../../product_media/models/product_media.model';
+import { ProductInfo } from '../../product-info/model/product-info.model';
+import { Category } from '../../category/model/category.model';
+import { ProductModel } from '../../product_model/models/product_model.model';
+import { Brand } from '../../brands/models/brands.model';
+import { Rating } from '../../rating/models/rating.model';
+import { ViewedProduct } from '../../viewed_products/models/viewed_product.model';
 
 interface ProductAttr {
   name: string;
@@ -53,24 +66,33 @@ export class Product extends Model<Product, ProductAttr> {
   })
   price: number;
 
+  @ForeignKey(() => Category)
   @ApiProperty({ example: 1, description: 'category id' })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   category_id: number;
 
+  @ForeignKey(() => ProductModel)
   @ApiProperty({ example: 1, description: 'model id' })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   model_id: number;
 
+  @ForeignKey(() => Brand)
   @ApiProperty({ example: 1, description: 'brand id' })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   brand_id: number;
 
@@ -82,4 +104,36 @@ export class Product extends Model<Product, ProductAttr> {
   quantity: number;
 
   //================== Relationships ================================
+  @BelongsToMany(() => Branch, () => ProductBranch)
+  branches: Branch[];
+
+  @HasMany(() => Cart)
+  carts: Cart[];
+
+  @HasMany(() => Comment)
+  comments: Comment[];
+
+  @HasMany(() => Rating)
+  ratings: Rating[];
+
+  @HasMany(() => LikedProduct)
+  liked_products: LikedProduct[];
+
+  @HasMany(() => ViewedProduct)
+  viewed_products: ViewedProduct[];
+
+  @HasMany(() => ProductMedia)
+  product_medias: ProductMedia[];
+
+  @HasMany(() => ProductInfo)
+  product_infos: ProductInfo[];
+
+  @BelongsTo(() => Category)
+  category: Category;
+
+  @BelongsTo(() => ProductModel)
+  product_model: ProductModel;
+
+  @BelongsTo(() => Brand)
+  brands: Brand;
 }

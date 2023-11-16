@@ -9,7 +9,8 @@ import {
   BelongsTo,
   Default,
 } from 'sequelize-typescript';
-// import { Region } from '../../region/model/region.model';
+import { Attribute } from '../../attribute/model/attribute.model';
+import { Category } from '../../category/model/category.model';
 
 interface AttributeGroupAttr {
   name: string;
@@ -34,9 +35,13 @@ export class AttributeGroup extends Model<AttributeGroup, AttributeGroupAttr> {
   })
   name: string;
 
+  @ForeignKey(() => Category)
   @ApiProperty({ example: 1, description: 'Category id' })
   @Column({
     type: DataType.INTEGER,
+    allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   category_id: number;
 
@@ -46,4 +51,11 @@ export class AttributeGroup extends Model<AttributeGroup, AttributeGroupAttr> {
     allowNull: false,
   })
   position: number;
+
+  //================== Relationships ================================
+  @HasMany(() => Attribute)
+  attributes: Attribute[];
+
+  @BelongsTo(() => Category)
+  category: Category;
 }

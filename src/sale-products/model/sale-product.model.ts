@@ -1,13 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
-// import { Region } from '../../region/model/region.model';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { ProductModel } from '../../product_model/models/product_model.model';
 
 interface SaleProductsAttr {
   product_model_id: number;
   sale_precentage: number;
   sale_start_date: Date;
   sale_end_date: Date;
-  status: boolean
+  status: boolean;
 }
 
 @Table({ tableName: 'sale-products' })
@@ -20,10 +27,13 @@ export class SaleProducts extends Model<SaleProducts, SaleProductsAttr> {
   })
   id: number;
 
+  @ForeignKey(() => ProductModel)
   @ApiProperty({ example: 1, description: 'Product model id' })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   product_model_id: number;
 
@@ -54,4 +64,8 @@ export class SaleProducts extends Model<SaleProducts, SaleProductsAttr> {
     allowNull: false,
   })
   status: boolean;
+
+  //================== Relationships ================================
+  @BelongsTo(() => ProductModel)
+  product_model: ProductModel;
 }

@@ -9,6 +9,15 @@ import {
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
 import { CustomerLocation } from '../../customer_location/models/customer_location.model';
+import { Cart } from '../../cart/models/cart.model';
+import { Comment } from '../../comments/models/comment.model';
+import { CustomerCard } from '../../customer_card/models/customer_card.model';
+import { History } from '../../history/models/history.model';
+import { LikedProduct } from '../../liked_products/models/liked_product.model';
+import { Order } from '../../order/models/order.model';
+import { Rating } from '../../rating/models/rating.model';
+import { ViewedProduct } from '../../viewed_products/models/viewed_product.model';
+import { AdminCustomer } from '../../admin_customer/models/admin_customer.model';
 
 interface CustomerAttr {
   first_name: string;
@@ -98,4 +107,31 @@ export class Customer extends Model<Customer, CustomerAttr> {
   //================== Relationships ================================
   @HasMany(() => CustomerLocation)
   customer_locations: CustomerLocation[];
+
+  @HasMany(() => Cart)
+  carts: Cart[];
+
+  @HasMany(() => Rating)
+  ratings: Rating[];
+
+  @HasMany(() => Comment)
+  comments: Comment[];
+
+  @HasMany(() => CustomerCard)
+  customer_cards: CustomerCard[];
+
+  @HasMany(() => History)
+  histories: History[];
+
+  @HasMany(() => LikedProduct)
+  liked_products: LikedProduct[];
+
+  @HasMany(() => Order)
+  orders: Order[];
+
+  @HasMany(() => AdminCustomer)
+  admin_customer_messages: AdminCustomer[];
+
+  @HasMany(() => ViewedProduct)
+  viewed_products: ViewedProduct[];
 }

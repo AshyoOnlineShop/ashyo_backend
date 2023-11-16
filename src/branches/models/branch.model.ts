@@ -12,7 +12,7 @@ import {
 import { Region } from '../../region/models/region.model';
 import { AboutShop } from '../../about_shop/models/about_shop.model';
 import { ProductBranch } from '../../product_branches/models/product_branch.model';
-// import {ProductBranches} from '../../product_branches/models/product_branches.model'
+import { Product } from '../../products/models/product.model';
 
 interface BranchAttr {
   region_id: number;
@@ -96,6 +96,6 @@ export class Branch extends Model<Branch, BranchAttr> {
   @BelongsTo(() => AboutShop)
   about_shop: AboutShop;
 
-  // @BelongsToMany(() => Product, () => ProductBranch)
-  // branches: ProductBranch[];
+  @BelongsToMany(() => Product, () => ProductBranch)
+  products: Product[];
 }
