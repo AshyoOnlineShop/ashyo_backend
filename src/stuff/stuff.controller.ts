@@ -106,7 +106,7 @@ export class StuffController {
     }
   }
   // ================= AUTH ==================================================
-  @UseGuards(SuperadminGuard)
+  // @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Signup Stuff' })
   @ApiResponse({ status: 201, type: Stuff })
   @Post('signup')
