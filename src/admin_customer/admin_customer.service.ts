@@ -28,6 +28,7 @@ export class AdminCustomerService {
   async getAdminCustomerById(id: number): Promise<AdminCustomer> {
     const admin_customer = await this.admin_customerRepo.findOne({
       where: { id },
+      include: { all: true }
     });
     return admin_customer;
   }

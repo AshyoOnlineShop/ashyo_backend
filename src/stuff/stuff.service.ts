@@ -42,7 +42,9 @@ export class StuffService {
 
   async getStuffById(id: number): Promise<Stuff> {
     try {
-      const stuff = await this.stuffRepo.findByPk(id);
+      const stuff = await this.stuffRepo.findByPk(id, {
+        include: { all: true },
+      });
 
       if (!stuff) {
         throw new NotFoundException(`Stuff with ID ${id} not found`);

@@ -12,39 +12,42 @@ export class ViewedProductsService {
   ) {}
 
   async create(createViewedProductDto: CreateViewedProductDto) {
-    const comment = await this.ViewedProductRepository.create(
+    const data = await this.ViewedProductRepository.create(
       createViewedProductDto,
     );
 
-    return comment;
+    return data;
   }
 
   async findAll() {
-    const cart = await this.ViewedProductRepository.findAll({
+    const data = await this.ViewedProductRepository.findAll({
       include: { all: true },
     });
 
-    return cart;
+    return data;
   }
 
   async findOne(id: number) {
-    const cart = await this.ViewedProductRepository.findOne({ where: { id } });
+    const data = await this.ViewedProductRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
 
-    return cart;
+    return data;
   }
 
   async update(id: number, updateViewedProductDto: UpdateViewedProductDto) {
-    const cart = await this.ViewedProductRepository.update(
+    const data = await this.ViewedProductRepository.update(
       updateViewedProductDto,
       { where: { id } },
     );
 
-    return cart;
+    return data;
   }
 
   async remove(id: number) {
-    const cart = await this.ViewedProductRepository.destroy({ where: { id } });
+    const data = await this.ViewedProductRepository.destroy({ where: { id } });
 
-    return cart;
+    return data;
   }
 }

@@ -23,7 +23,10 @@ export class CommentsService {
   }
 
   async findOne(id: number) {
-    const cart = await this.CommentRepository.findOne({ where: { id } });
+    const cart = await this.CommentRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
     return cart;
   }
 

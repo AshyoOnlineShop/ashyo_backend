@@ -24,7 +24,6 @@ export class UpdateCustomerCardDto extends PartialType(CreateCustomerCardDto) {
     description: 'cardholder_name',
   })
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   cardholder_name?: string;
 
@@ -33,9 +32,16 @@ export class UpdateCustomerCardDto extends PartialType(CreateCustomerCardDto) {
     description: 'expiration_date',
   })
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   expiration_date?: string;
+
+  @ApiProperty({
+    example: 1234,
+    description: 'card cvv',
+  })
+  @IsNumber()
+  @IsOptional()
+  cvv?: number;
 
   @ApiProperty({
     example: 1,
@@ -50,7 +56,6 @@ export class UpdateCustomerCardDto extends PartialType(CreateCustomerCardDto) {
     description: 'last_used',
   })
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   last_used?: string;
 }

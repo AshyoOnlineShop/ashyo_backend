@@ -14,7 +14,9 @@ export class ProductModelService {
   async createProductModel(
     createProductModelDto: CreateProductModelDto,
   ): Promise<ProductModel> {
-    const product_model = await this.product_modelRepo.create(createProductModelDto);
+    const product_model = await this.product_modelRepo.create(
+      createProductModelDto,
+    );
     return product_model;
   }
 
@@ -28,6 +30,7 @@ export class ProductModelService {
   async getProductModelById(id: number): Promise<ProductModel> {
     const product_model = await this.product_modelRepo.findOne({
       where: { id },
+      include: { all: true },
     });
     return product_model;
   }
@@ -40,10 +43,13 @@ export class ProductModelService {
     id: number,
     updateProductModelDto: UpdateProductModelDto,
   ): Promise<ProductModel> {
-    const product_model = await this.product_modelRepo.update(updateProductModelDto, {
-      where: { id },
-      returning: true,
-    });
+    const product_model = await this.product_modelRepo.update(
+      updateProductModelDto,
+      {
+        where: { id },
+        returning: true,
+      },
+    );
     console.log(product_model);
 
     return product_model[1][0].dataValues;

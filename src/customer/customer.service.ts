@@ -42,7 +42,9 @@ export class CustomerService {
 
   async getCustomerById(id: number): Promise<Customer> {
     try {
-      const customer = await this.customerRepo.findByPk(id);
+      const customer = await this.customerRepo.findByPk(id, {
+        include: { all: true },
+      });
 
       if (!customer) {
         throw new NotFoundException(`Customer with ID ${id} not found`);
