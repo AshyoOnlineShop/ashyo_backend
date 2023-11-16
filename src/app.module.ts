@@ -58,7 +58,7 @@ import { ProductMediaModule } from './product_media/product_media.module';
         AttributeGroup,
         ProductInfo,
         BrandCategory,
-        SaleProducts
+        SaleProducts,
         Product,
         ProductMedia,
       ],
@@ -78,7 +78,7 @@ import { ProductMediaModule } from './product_media/product_media.module';
     AttributeGroupModule,
     ProductInfoModule,
     BrandCategoryModule,
-    SaleProductsModule
+    SaleProductsModule,
     ProductModule,
     ProductMediaModule,
   ],
