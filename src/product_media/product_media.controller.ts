@@ -13,15 +13,14 @@ import { CreateProductMediaDto } from './dto/create-product_media.dto';
 import { ProductMedia } from './models/product_media.model';
 import { UpdateProductMediaDto } from './dto/update-product_media.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('ProductMedia')
 @Controller('product_media')
 export class ProductMediaController {
   constructor(private readonly product_mediaService: ProductMediaService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create product_media' })
   @ApiResponse({ status: 200, description: 'New product_media' })
   @Post('create')
@@ -46,7 +45,7 @@ export class ProductMediaController {
     return this.product_mediaService.getProductMediaById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete product_media' })
   @ApiResponse({ status: 200, description: 'delete product_media' })
   @Delete('delete/:id')
@@ -54,7 +53,7 @@ export class ProductMediaController {
     return this.product_mediaService.deleteProductMediaById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update product_media' })
   @ApiResponse({ status: 200, description: 'update product_media' })
   @Put('update/:id')

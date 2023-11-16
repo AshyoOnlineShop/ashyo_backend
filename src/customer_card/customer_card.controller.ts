@@ -13,12 +13,14 @@ import { CreateCustomerCardDto } from './dto/create-customer_card.dto';
 import { CustomerCard } from './models/customer_card.model';
 import { UpdateCustomerCardDto } from './dto/update-card_types.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CustomerGuard } from '../guards/customer.guard';
 
 @ApiTags('CustomerCard')
 @Controller('customer_card')
 export class CustomerCardController {
   constructor(private readonly customerCardService: CustomerCardService) {}
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Create a new customer card' })
   @ApiResponse({ status: 200, description: 'New customer card' })
   @Post('create')
@@ -38,6 +40,7 @@ export class CustomerCardController {
     return this.customerCardService.getAllCustomerCards();
   }
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Get customer card by ID' })
   @ApiResponse({ status: 200, description: 'Get customer card by ID' })
   @Get(':id')
@@ -45,15 +48,16 @@ export class CustomerCardController {
     return this.customerCardService.getCustomerCardById(+id);
   }
 
-//   @ApiOperation({ summary: 'Get customer card by name' })
-//   @ApiResponse({ status: 200, description: 'Get customer card by name' })
-//   @Get('name/:name')
-//   async getCustomerCardByName(
-//     @Param('name') name: string,
-//   ): Promise<CustomerCard> {
-//     return this.customerCardService.getCustomerCardByName(name);
-//   }
+  //   @ApiOperation({ summary: 'Get customer card by name' })
+  //   @ApiResponse({ status: 200, description: 'Get customer card by name' })
+  //   @Get('name/:name')
+  //   async getCustomerCardByName(
+  //     @Param('name') name: string,
+  //   ): Promise<CustomerCard> {
+  //     return this.customerCardService.getCustomerCardByName(name);
+  //   }
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Delete customer card by ID' })
   @ApiResponse({ status: 200, description: 'Delete customer card by ID' })
   @Delete('delete/:id')
@@ -61,6 +65,7 @@ export class CustomerCardController {
     return this.customerCardService.deleteCustomerCardById(+id);
   }
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Update customer card by ID' })
   @ApiResponse({ status: 200, description: 'Update customer card by ID' })
   @Put('update/:id')

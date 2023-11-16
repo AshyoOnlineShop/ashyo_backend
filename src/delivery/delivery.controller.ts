@@ -13,15 +13,12 @@ import { CreateDeliveryDto } from './dto/create-delivery.dto';
 import { Delivery } from './models/delivery.model';
 import { UpdateDeliveryDto } from './dto/update-delivery.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Delivery')
 @Controller('delivery')
 export class DeliveryController {
   constructor(private readonly deliveryService: DeliveryService) {}
 
-  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create delivery' })
   @ApiResponse({ status: 200, description: 'New delivery' })
   @Post('create')
@@ -46,7 +43,6 @@ export class DeliveryController {
     return this.deliveryService.getDeliveryById(+id);
   }
 
-  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete delivery' })
   @ApiResponse({ status: 200, description: 'delete delivery' })
   @Delete('delete/:id')
@@ -54,7 +50,6 @@ export class DeliveryController {
     return this.deliveryService.deleteDeliveryById(+id);
   }
 
-  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update delivery' })
   @ApiResponse({ status: 200, description: 'update delivery' })
   @Put('update/:id')

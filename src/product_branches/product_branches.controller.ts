@@ -13,15 +13,15 @@ import { CreateProductBranchDto } from './dto/create-product_branch.dto';
 import { ProductBranch } from './models/product_branch.model';
 import { UpdateProductBranchDto } from './dto/update-product_branch.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
+
 
 @ApiTags('ProductBranch')
 @Controller('productBranch')
 export class ProductBranchesController {
   constructor(private readonly productBranchService: ProductBranchesService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create productBranch' })
   @ApiResponse({ status: 200, description: 'New productBranch' })
   @Post('create')
@@ -32,6 +32,7 @@ export class ProductBranchesController {
     return productBranch;
   }
 
+  
   @ApiOperation({ summary: 'get all productBranches' })
   @ApiResponse({ status: 200, description: 'get all productBranch' })
   @Get('all')
@@ -46,7 +47,7 @@ export class ProductBranchesController {
     return this.productBranchService.getProductBranchById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete productBranch' })
   @ApiResponse({ status: 200, description: 'delete productBranch' })
   @Delete('delete/:id')
@@ -54,7 +55,7 @@ export class ProductBranchesController {
     return this.productBranchService.deleteProductBranchById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update productBranch' })
   @ApiResponse({ status: 200, description: 'update productBranch' })
   @Put('update/:id')

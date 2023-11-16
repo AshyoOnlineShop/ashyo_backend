@@ -13,15 +13,15 @@ import { CreateHistoryDto } from './dto/create-history.dto';
 import { History } from './models/history.model';
 import { UpdateHistoryDto } from './dto/update-history.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { CustomerGuard } from '../guards/admin.guard';
+import { CustomerGuard } from './../guards/customer.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('History')
 @Controller('history')
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
 
-  // @UseGuards(CustomerGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Create a new history' })
   @ApiResponse({ status: 200, description: 'New history created' })
   @Post('create')
@@ -30,6 +30,7 @@ export class HistoryController {
     return history;
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all histories' })
   @ApiResponse({ status: 200, description: 'Get all histories' })
   @Get('all')
@@ -37,6 +38,7 @@ export class HistoryController {
     return this.historyService.getAllHistories();
   }
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Get history by ID' })
   @ApiResponse({ status: 200, description: 'Get history by ID' })
   @Get(':id')
@@ -44,7 +46,7 @@ export class HistoryController {
     return this.historyService.getHistoryById(+id);
   }
 
-  // @UseGuards(CustomerGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Delete history by ID' })
   @ApiResponse({ status: 200, description: 'Delete history by ID' })
   @Delete('delete/:id')
@@ -52,7 +54,7 @@ export class HistoryController {
     return this.historyService.deleteHistoryById(+id);
   }
 
-  // @UseGuards(CustomerGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Update history' })
   @ApiResponse({ status: 200, description: 'Update history' })
   @Put('update/:id')

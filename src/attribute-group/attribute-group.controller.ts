@@ -6,18 +6,21 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { AttributeGroupService } from './attribute-group.service';
 import { CreateAttributeGroupDto } from './dto/create-attribute-group.dto';
 import { UpdateAttributeGroupDto } from './dto/update-attribute-group.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AttributeGroup } from './model/attribute-group.model';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Attribute group')
 @Controller('attribute-group')
 export class AttributeGroupController {
   constructor(private readonly attributeGroupService: AttributeGroupService) {}
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create attribute group' })
   @ApiResponse({ type: AttributeGroup })
   @Post()
@@ -39,6 +42,7 @@ export class AttributeGroupController {
     return this.attributeGroupService.findOne(+id);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update attribute group' })
   @ApiResponse({ type: [Number] })
   @Patch(':id')
@@ -49,6 +53,7 @@ export class AttributeGroupController {
     return this.attributeGroupService.update(+id, updateAttributeDto);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete attribute group' })
   @ApiResponse({ type: Number })
   @Delete(':id')

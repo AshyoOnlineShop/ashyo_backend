@@ -1,40 +1,57 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ViewedProductsService } from './viewed_products.service';
 import { CreateViewedProductDto } from './dto/create-viewed_product.dto';
 import { UpdateViewedProductDto } from './dto/update-viewed_product.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { CustomerGuard } from '../guards/customer.guard';
 
 @ApiTags('Viewed Products')
-
 @Controller('viewed-products')
 export class ViewedProductsController {
   constructor(private readonly viewedProductsService: ViewedProductsService) {}
 
-  @ApiOperation({summary: "Foydalanuvchini yaratish"})
+  // @UseGuards(CustomerGuard)
+  @ApiOperation({ summary: 'Create viewed products' })
   @Post()
   create(@Body() createViewedProductDto: CreateViewedProductDto) {
     return this.viewedProductsService.create(createViewedProductDto);
   }
 
-  @ApiOperation({summary: "baarcha foydalanuvchilarni chiqarish"})
+  // @UseGuards(CustomerGuard)
+  @ApiOperation({ summary: 'Get all viewed products' })
   @Get()
   findAll() {
     return this.viewedProductsService.findAll();
   }
 
-  @ApiOperation({summary: "id bo'yicha  chiqarish"})
+  // @UseGuards(CustomerGuard)
+  @ApiOperation({ summary: 'Get viewed product by id' })
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.viewedProductsService.findOne(+id);
   }
 
-  @ApiOperation({summary: "id bo'yicha  patch qilish"})
+  // @UseGuards(CustomerGuard)
+  @ApiOperation({ summary: 'Update viewed product by id' })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateViewedProductDto: UpdateViewedProductDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateViewedProductDto: UpdateViewedProductDto,
+  ) {
     return this.viewedProductsService.update(+id, updateViewedProductDto);
   }
 
-  @ApiOperation({summary: "id bo'yicha  o'chirish"})
+  // @UseGuards(CustomerGuard)
+  @ApiOperation({ summary: 'Delete viewed product by id' })
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.viewedProductsService.remove(+id);

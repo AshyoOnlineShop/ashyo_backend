@@ -13,15 +13,12 @@ import { CreateAdminCustomerDto } from './dto/create-admin_customer.dto';
 import { AdminCustomer } from './models/admin_customer.model';
 import { UpdateAdminCustomerDto } from './dto/update-admin_customer.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('AdminCustomer')
 @Controller('admin_customer')
 export class AdminCustomerController {
   constructor(private readonly admin_customerService: AdminCustomerService) {}
 
-  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create admin_customer' })
   @ApiResponse({ status: 200, description: 'New admin_customer' })
   @Post('create')
@@ -46,7 +43,6 @@ export class AdminCustomerController {
     return this.admin_customerService.getAdminCustomerById(+id);
   }
 
-  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete admin_customer' })
   @ApiResponse({ status: 200, description: 'delete admin_customer' })
   @Delete('delete/:id')
@@ -54,7 +50,6 @@ export class AdminCustomerController {
     return this.admin_customerService.deleteAdminCustomerById(+id);
   }
 
-  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update admin_customer' })
   @ApiResponse({ status: 200, description: 'update admin_customer' })
   @Put('update/:id')

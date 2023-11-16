@@ -13,15 +13,14 @@ import { CreateProductModelDto } from './dto/create-product_model.dto';
 import { ProductModel } from './models/product_model.model';
 import { UpdateProductModelDto } from './dto/update-product_model.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('ProductModel')
 @Controller('product_model')
 export class ProductModelController {
   constructor(private readonly product_modelService: ProductModelService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create product_model' })
   @ApiResponse({ status: 200, description: 'New product_model' })
   @Post('create')
@@ -46,7 +45,7 @@ export class ProductModelController {
     return this.product_modelService.getProductModelById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete product_model' })
   @ApiResponse({ status: 200, description: 'delete product_model' })
   @Delete('delete/:id')
@@ -54,7 +53,7 @@ export class ProductModelController {
     return this.product_modelService.deleteProductModelById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update product_model' })
   @ApiResponse({ status: 200, description: 'update product_model' })
   @Put('update/:id')

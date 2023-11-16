@@ -13,15 +13,14 @@ import { CreateBrandDto } from './dto/create-brands.dto';
 import { Brand } from './models/brands.model';
 import { UpdateBrandDto } from './dto/update-brands.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Brand')
 @Controller('brand')
 export class BrandController {
   constructor(private readonly brandService: BrandService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create brand' })
   @ApiResponse({ status: 200, description: 'New brand' })
   @Post('create')
@@ -46,7 +45,7 @@ export class BrandController {
     return this.brandService.getBrandById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete brand' })
   @ApiResponse({ status: 200, description: 'delete brand' })
   @Delete('delete/:id')
@@ -54,7 +53,7 @@ export class BrandController {
     return this.brandService.deleteBrandById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update brand' })
   @ApiResponse({ status: 200, description: 'update brand' })
   @Put('update/:id')
