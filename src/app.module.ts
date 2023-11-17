@@ -61,6 +61,7 @@ import { ViewedProductsModule } from './viewed_products/viewed_products.module';
 import { LikedProductsModule } from './liked_products/liked_products.module';
 import { AdminCustomer } from './admin_customer/models/admin_customer.model';
 import { AdminCustomerModule } from './admin_customer/admin_customer.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -137,6 +138,7 @@ import { AdminCustomerModule } from './admin_customer/admin_customer.module';
     ViewedProductsModule,
     LikedProductsModule,
     AdminCustomerModule,
+    MailModule,
   ],
   controllers: [],
   providers: [],

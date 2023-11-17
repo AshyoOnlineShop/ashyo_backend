@@ -13,7 +13,7 @@ async function start() {
       .addTag('NodeJs, NestJs, Postgres, Sequelize') 
       .build();
 
-    const PORT = process.env.PORT || 3003;
+    const PORT = process.env.API_PORT || 3003;
     const app = await NestFactory.create(AppModule, {
       logger: ['error', 'warn', 'log'],
     });

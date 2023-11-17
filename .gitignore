@@ -36,3 +36,11 @@ lerna-debug.log*
 
 .env
 temp.txt
+
+Dockerfile
+pgdata
+.env
+.env1
+docker-compose.yml
+docker-compose1.yml
+.dockerignore
