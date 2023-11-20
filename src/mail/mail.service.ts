@@ -7,7 +7,7 @@ import { Stuff } from '../stuff/models/stuff.model';
 export class MailService {
   constructor(private mailerService: MailerService) {}
   async sendCustomerConfirmation(customer: Customer): Promise<void> {
-    const url = `${process.env.API_HOST}/api/customer/activate/${customer.activation_link}`;
+    const url = `${process.env.API_HOST}:${process.env.API_PORT}/api/customer/activate/${customer.activation_link}`;
     console.log(url);
     await this.mailerService.sendMail({
       to: customer.email,

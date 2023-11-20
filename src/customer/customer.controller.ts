@@ -25,6 +25,7 @@ import { UpdateCustomerActivenessDto } from './dto/update-customer-activeness.dt
 import { CustomerSelfGuard } from '../guards/customer.self.guard';
 import { CustomerGuard } from '../guards/customer.guard';
 import { AdminGuard } from '../guards/admin.guard';
+import { SuperadminGuard } from '../guards/superadmin.guard';
 
 @ApiTags('Customer')
 @Controller('customer')
