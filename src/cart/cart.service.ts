@@ -28,6 +28,7 @@ export class CartService {
   async getCartById(id: number): Promise<Cart> {
     const cart = await this.cartRepo.findOne({
       where: { id },
+      include: { all: true }
     });
     return cart;
   }

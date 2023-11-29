@@ -17,6 +17,7 @@ interface CustomerCardAttr {
   card_number: number;
   cardholder_name: string;
   expiration_date: string;
+  cvv: number;
   card_type_id: number;
   last_used: string;
 }
@@ -48,6 +49,13 @@ export class CustomerCard extends Model<CustomerCard, CustomerCardAttr> {
   @ApiProperty({ example: '01/23', description: 'Expiration Date' })
   @Column({ type: DataType.STRING, allowNull: false })
   expiration_date: string;
+
+  @ApiProperty({ example: 1232, description: 'Card cvv' })
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  cvv: number;
 
   @ForeignKey(() => Card_types)
   @ApiProperty({ example: 1, description: 'Card Type Id' })

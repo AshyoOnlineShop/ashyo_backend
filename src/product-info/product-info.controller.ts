@@ -6,18 +6,21 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductInfoService } from './product-info.service';
 import { CreateProductInfoDto } from './dto/create-product-info.dto';
 import { UpdateProductInfoDto } from './dto/update-product-info.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductInfo } from './model/product-info.model';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Product info')
 @Controller('product-info')
 export class ProductInfoController {
   constructor(private readonly productInfoService: ProductInfoService) {}
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create product info' })
   @ApiResponse({ type: ProductInfo })
   @Post()
@@ -39,6 +42,7 @@ export class ProductInfoController {
     return this.productInfoService.findOne(+id);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update product info' })
   @ApiResponse({ type: [Number] })
   @Patch(':id')
@@ -49,6 +53,7 @@ export class ProductInfoController {
     return this.productInfoService.update(+id, updateAttributeDto);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete product info' })
   @ApiResponse({ type: Number })
   @Delete(':id')

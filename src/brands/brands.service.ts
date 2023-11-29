@@ -11,9 +11,7 @@ export class BrandService {
     private brandRepo: typeof Brand,
   ) {}
 
-  async createBrand(
-    createBrandDto: CreateBrandDto,
-  ): Promise<Brand> {
+  async createBrand(createBrandDto: CreateBrandDto): Promise<Brand> {
     const brand = await this.brandRepo.create(createBrandDto);
     return brand;
   }
@@ -28,6 +26,7 @@ export class BrandService {
   async getBrandById(id: number): Promise<Brand> {
     const brand = await this.brandRepo.findOne({
       where: { id },
+      include: { all: true },
     });
     return brand;
   }

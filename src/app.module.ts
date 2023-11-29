@@ -91,6 +91,7 @@ const fileFilter = (req, file, callback) => {
     callback(null, false);
   }
 };
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -174,6 +175,7 @@ const fileFilter = (req, file, callback) => {
     LikedProductsModule,
     AdminCustomerModule,
     ImgModule
+    MailModule,
   ],
   controllers: [],
   providers: [],

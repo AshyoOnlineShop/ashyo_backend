@@ -21,7 +21,10 @@ export class RatingService {
   }
 
   async findOne(id: number) {
-    const cart = await this.RatingRepository.findOne({ where: { id } });
+    const cart = await this.RatingRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
     return cart;
   }
 

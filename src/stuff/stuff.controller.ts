@@ -31,21 +31,21 @@ import { AdminGuard } from '../guards/admin.guard';
 export class StuffController {
   constructor(private readonly stuffService: StuffService) {}
 
+  @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Get all stuffs' })
   @Get('all')
   async getAllStuff() {
     return this.stuffService.getAllStuff();
   }
 
-  @UseGuards(StuffSelfGuard)
-  // @UseGuards(SuperadminGuard)
-  @UseGuards(AdminGuard)
+  @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Get stuff by id' })
   @Get(':id')
   async getStuffById(@Param('id') id: string) {
     return this.stuffService.getStuffById(+id);
   }
 
+  @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Delete stuff' })
   @Delete('delete/:id')
   async deleteStuffById(@Param('id') id: string) {
@@ -82,8 +82,8 @@ export class StuffController {
     return { message: 'Password changed successfully.' };
   }
 
+  @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Change stuff activeness' })
-  // @UseGuards(AdminGuard)
   @Put('activeness/:id')
   async changeStuffActiveness(
     @Param('id') id: number,
@@ -106,7 +106,7 @@ export class StuffController {
     }
   }
   // ================= AUTH ==================================================
-
+  // @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Signup Stuff' })
   @ApiResponse({ status: 201, type: Stuff })
   @Post('signup')

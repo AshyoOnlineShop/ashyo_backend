@@ -32,6 +32,14 @@ export class CreateCustomerCardDto {
   expiration_date: string;
 
   @ApiProperty({
+    example: 1234,
+    description: 'card cvv',
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  cvv: number;
+
+  @ApiProperty({
     example: 1,
     description: 'card_type_id',
   })

@@ -13,15 +13,14 @@ import { CreateDistrictDto } from './dto/create-district.dto';
 import { District } from './models/district.model';
 import { UpdateDistrictDto } from './dto/update-district.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('District')
 @Controller('district')
 export class DistrictController {
   constructor(private readonly districtService: DistrictService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create district' })
   @ApiResponse({ status: 200, description: 'New district' })
   @Post('create')
@@ -46,7 +45,7 @@ export class DistrictController {
     return this.districtService.getDistrictById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete district' })
   @ApiResponse({ status: 200, description: 'delete district' })
   @Delete('delete/:id')
@@ -54,7 +53,7 @@ export class DistrictController {
     return this.districtService.deleteDistrictById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update district' })
   @ApiResponse({ status: 200, description: 'update district' })
   @Put('update/:id')

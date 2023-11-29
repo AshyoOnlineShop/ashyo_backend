@@ -13,12 +13,14 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './models/product.model';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Product')
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create product' })
   @ApiResponse({ status: 200, description: 'New product' })
   @Post('create')
@@ -41,6 +43,7 @@ export class ProductController {
     return this.productService.getProductById(+id);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete product' })
   @ApiResponse({ status: 200, description: 'delete product' })
   @Delete('delete/:id')
@@ -48,6 +51,7 @@ export class ProductController {
     return this.productService.deleteProductById(+id);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update product' })
   @ApiResponse({ status: 200, description: 'update product' })
   @Put('update/:id')

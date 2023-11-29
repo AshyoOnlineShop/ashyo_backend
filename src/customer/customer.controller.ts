@@ -24,18 +24,20 @@ import { ChangeCustomerPasswordDto } from './dto/change-customer-password.dto';
 import { UpdateCustomerActivenessDto } from './dto/update-customer-activeness.dto';
 import { CustomerSelfGuard } from '../guards/customer.self.guard';
 import { CustomerGuard } from '../guards/customer.guard';
+import { AdminGuard } from '../guards/admin.guard';
+import { SuperadminGuard } from '../guards/superadmin.guard';
 
 @ApiTags('Customer')
 @Controller('customer')
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all customers' })
   @Get('all')
   async getAllCustomer() {
     return this.customerService.getAllCustomer();
   }
-
 
   @UseGuards(CustomerSelfGuard)
   @UseGuards(CustomerGuard)
@@ -45,12 +47,15 @@ export class CustomerController {
     return this.customerService.getCustomerById(+id);
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete customer' })
   @Delete('delete/:id')
   async deleteCustomerById(@Param('id') id: string) {
     return this.customerService.deleteCustomerById(+id);
   }
 
+  @UseGuards(CustomerSelfGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Update customer' })
   @Put('update/:id')
   async updateCustomer(
@@ -60,6 +65,8 @@ export class CustomerController {
     return this.customerService.updateCustomer(+id, updateCustomerDto);
   }
 
+  @UseGuards(CustomerSelfGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Change customer password' })
   @Put('change-password/:id')
   async changePassword(
@@ -81,8 +88,8 @@ export class CustomerController {
     return { message: 'Password changed successfully.' };
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Change customer activeness' })
-  // @UseGuards(AdminGuard)
   @Put('activeness/:id')
   async changeCustomerActiveness(
     @Param('id') id: number,

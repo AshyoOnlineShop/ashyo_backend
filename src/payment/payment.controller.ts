@@ -13,6 +13,8 @@ import { CreatePaymentDto } from './dto/create-payment.dto';
 import { Payment } from './models/payment.model';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CustomerGuard } from '../guards/customer.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 
 @ApiTags('Payment')
@@ -20,6 +22,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Create a new payment' })
   @ApiResponse({ status: 200, description: 'New payment created' })
   @Post('create')
@@ -28,6 +31,7 @@ export class PaymentController {
     return payment;
   }
 
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all payments' })
   @ApiResponse({ status: 200, description: 'Get all payments' })
   @Get('all')
@@ -35,6 +39,7 @@ export class PaymentController {
     return this.paymentService.getAllPayments();
   }
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Get payment by ID' })
   @ApiResponse({ status: 200, description: 'Get payment by ID' })
   @Get(':id')
@@ -42,6 +47,7 @@ export class PaymentController {
     return this.paymentService.getPaymentById(+id);
   }
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Delete payment by ID' })
   @ApiResponse({ status: 200, description: 'Delete payment by ID' })
   @Delete('delete/:id')
@@ -49,6 +55,7 @@ export class PaymentController {
     return this.paymentService.deletePaymentById(+id);
   }
 
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Update payment' })
   @ApiResponse({ status: 200, description: 'Update payment' })
   @Put('update/:id')

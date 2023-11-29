@@ -11,19 +11,26 @@ export class CustomerLocationService {
     private customerLocationRepo: typeof CustomerLocation,
   ) {}
 
-  async createCustomerLocation(createCustomerLocationDto: CreateCustomerLocationDto): Promise<CustomerLocation> {
-    const customerLocation = await this.customerLocationRepo.create(createCustomerLocationDto);
+  async createCustomerLocation(
+    createCustomerLocationDto: CreateCustomerLocationDto,
+  ): Promise<CustomerLocation> {
+    const customerLocation = await this.customerLocationRepo.create(
+      createCustomerLocationDto,
+    );
     return customerLocation;
   }
 
   async getAllCustomerLocations(): Promise<CustomerLocation[]> {
-    const customerLocation = await this.customerLocationRepo.findAll({ include: { all: true } });
+    const customerLocation = await this.customerLocationRepo.findAll({
+      include: { all: true },
+    });
     return customerLocation;
   }
 
   async getCustomerLocationById(id: number): Promise<CustomerLocation> {
     const customerLocation = await this.customerLocationRepo.findOne({
       where: { id },
+      include: { all: true },
     });
     return customerLocation;
   }
@@ -36,12 +43,15 @@ export class CustomerLocationService {
     id: number,
     updateCustomerLocationDto: UpdateCustomerLocationDto,
   ): Promise<CustomerLocation> {
-    const customerLocation = await this.customerLocationRepo.update(updateCustomerLocationDto, {
-      where: { id },
-      returning: true,
-    });
+    const customerLocation = await this.customerLocationRepo.update(
+      updateCustomerLocationDto,
+      {
+        where: { id },
+        returning: true,
+      },
+    );
     console.log(customerLocation);
-    
+
     return customerLocation[1][0].dataValues;
   }
 }

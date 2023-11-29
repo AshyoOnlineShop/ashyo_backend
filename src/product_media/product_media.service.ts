@@ -14,7 +14,9 @@ export class ProductMediaService {
   async createProductMedia(
     createProductMediaDto: CreateProductMediaDto,
   ): Promise<ProductMedia> {
-    const product_media = await this.product_mediaRepo.create(createProductMediaDto);
+    const product_media = await this.product_mediaRepo.create(
+      createProductMediaDto,
+    );
     return product_media;
   }
 
@@ -28,6 +30,7 @@ export class ProductMediaService {
   async getProductMediaById(id: number): Promise<ProductMedia> {
     const product_media = await this.product_mediaRepo.findOne({
       where: { id },
+      include: { all: true },
     });
     return product_media;
   }
@@ -40,10 +43,13 @@ export class ProductMediaService {
     id: number,
     updateProductMediaDto: UpdateProductMediaDto,
   ): Promise<ProductMedia> {
-    const product_media = await this.product_mediaRepo.update(updateProductMediaDto, {
-      where: { id },
-      returning: true,
-    });
+    const product_media = await this.product_mediaRepo.update(
+      updateProductMediaDto,
+      {
+        where: { id },
+        returning: true,
+      },
+    );
     console.log(product_media);
 
     return product_media[1][0].dataValues;

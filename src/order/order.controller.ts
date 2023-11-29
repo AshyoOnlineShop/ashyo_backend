@@ -14,14 +14,16 @@ import { Order } from './models/order.model';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 // import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { CustomerGuard } from '../guards/admin.guard';
+import { CustomerGuard } from '../guards/customer.guard';
+import { AdminGuard } from '../guards/admin.guard';
+import { DeliverGuard } from '../guards/deliver.guard';
 
 @ApiTags('Order')
 @Controller('order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
-  // @UseGuards(CustomerGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Create an order' })
   @ApiResponse({ status: 200, description: 'New order created' })
   @Post('create')
@@ -30,6 +32,7 @@ export class OrderController {
     return order;
   }
 
+  @UseGuards(AdminGuard || DeliverGuard)
   @ApiOperation({ summary: 'Get all orders' })
   @ApiResponse({ status: 200, description: 'Get all orders' })
   @Get('all')
@@ -37,6 +40,7 @@ export class OrderController {
     return this.orderService.getAllOrders();
   }
 
+  @UseGuards(AdminGuard || DeliverGuard)
   @ApiOperation({ summary: 'Get an order by ID' })
   @ApiResponse({ status: 200, description: 'Get an order by ID' })
   @Get(':id')
@@ -44,7 +48,7 @@ export class OrderController {
     return this.orderService.getOrderById(+id);
   }
 
-  // @UseGuards(CustomerGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Delete an order' })
   @ApiResponse({ status: 200, description: 'Delete an order' })
   @Delete('delete/:id')
@@ -52,7 +56,7 @@ export class OrderController {
     return this.orderService.deleteOrderById(+id);
   }
 
-  // @UseGuards(CustomerGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Update an order' })
   @ApiResponse({ status: 200, description: 'Update an order' })
   @Put('update/:id')

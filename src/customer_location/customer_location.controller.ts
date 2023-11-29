@@ -13,25 +13,31 @@ import { CreateCustomerLocationDto } from './dto/create-customer_location.dto';
 import { CustomerLocation } from './models/customer_location.model';
 import { UpdateCustomerLocationDto } from './dto/update-customer_location.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
+import { DeliverGuard } from '../guards/deliver.guard';
+import { CustomerGuard } from '../guards/customer.guard';
 
 @ApiTags('CustomerLocation')
 @Controller('customerLocation')
 export class CustomerLocationController {
-  constructor(private readonly customerLocationService: CustomerLocationService) {}
+  constructor(
+    private readonly customerLocationService: CustomerLocationService,
+  ) {}
 
-  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create customerLocation' })
   @ApiResponse({ status: 200, description: 'New customerLocation' })
   @Post('create')
-  async createCustomerLocation(@Body() createCustomerLocationDto: CreateCustomerLocationDto) {
-    const customerLocation = await this.customerLocationService.createCustomerLocation(
-      createCustomerLocationDto,
-    );
+  async createCustomerLocation(
+    @Body() createCustomerLocationDto: CreateCustomerLocationDto,
+  ) {
+    const customerLocation =
+      await this.customerLocationService.createCustomerLocation(
+        createCustomerLocationDto,
+      );
     return customerLocation;
   }
 
+  @UseGuards(AdminGuard || DeliverGuard)
   @ApiOperation({ summary: 'get all customerLocationes' })
   @ApiResponse({ status: 200, description: 'get all customerLocation' })
   @Get('all')
@@ -39,14 +45,17 @@ export class CustomerLocationController {
     return this.customerLocationService.getAllCustomerLocations();
   }
 
+  @UseGuards(AdminGuard || DeliverGuard)
   @ApiOperation({ summary: 'get customerLocations by id' })
   @ApiResponse({ status: 200, description: 'get customerLocation by id' })
   @Get(':id')
-  async getCustomerLocationById(@Param('id') id: string): Promise<CustomerLocation> {
+  async getCustomerLocationById(
+    @Param('id') id: string,
+  ): Promise<CustomerLocation> {
     return this.customerLocationService.getCustomerLocationById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'to delete customerLocation' })
   @ApiResponse({ status: 200, description: 'delete customerLocation' })
   @Delete('delete/:id')
@@ -54,7 +63,7 @@ export class CustomerLocationController {
     return this.customerLocationService.deleteCustomerLocationById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'to update customerLocation' })
   @ApiResponse({ status: 200, description: 'update customerLocation' })
   @Put('update/:id')
@@ -62,6 +71,9 @@ export class CustomerLocationController {
     @Param('id') id: string,
     @Body() updateCustomerLocationDto: UpdateCustomerLocationDto,
   ): Promise<CustomerLocation> {
-    return this.customerLocationService.updateCustomerLocation(+id, updateCustomerLocationDto);
+    return this.customerLocationService.updateCustomerLocation(
+      +id,
+      updateCustomerLocationDto,
+    );
   }
 }

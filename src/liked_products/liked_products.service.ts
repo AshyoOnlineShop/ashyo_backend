@@ -18,28 +18,31 @@ export class LikedProductsService {
   }
 
   async findAll() {
-    const cart = await this.LikedProductRepository.findAll({
+    const liked = await this.LikedProductRepository.findAll({
       include: { all: true },
     });
-    return cart;
+    return liked;
   }
 
   async findOne(id: number) {
-    const cart = await this.LikedProductRepository.findOne({ where: { id } });
+    const liked = await this.LikedProductRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
 
-    return cart;
+    return liked;
   }
 
   async update(id: number, updateLikedProductDto: UpdateLikedProductDto) {
-    const cart = await this.LikedProductRepository.update(
+    const liked = await this.LikedProductRepository.update(
       updateLikedProductDto,
       { where: { id } },
     );
-    return cart;
+    return liked;
   }
 
   async remove(id: number) {
-    const cart = await this.LikedProductRepository.destroy({ where: { id } });
-    return cart;
+    const liked = await this.LikedProductRepository.destroy({ where: { id } });
+    return liked;
   }
 }

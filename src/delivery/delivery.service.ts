@@ -28,6 +28,7 @@ export class DeliveryService {
   async getDeliveryById(id: number): Promise<Delivery> {
     const delivery = await this.deliveryRepo.findOne({
       where: { id },
+      include: { all: true },
     });
     return delivery;
   }

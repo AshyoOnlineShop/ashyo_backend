@@ -28,6 +28,7 @@ export class DistrictService {
   async getDistrictById(id: number): Promise<District> {
     const district = await this.districtRepo.findOne({
       where: { id },
+      include: { all: true },
     });
     return district;
   }

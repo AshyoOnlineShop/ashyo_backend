@@ -13,15 +13,14 @@ import { CreateBranchDto } from './dto/create-branch.dto';
 import { Branch } from './models/branch.model';
 import { UpdateBranchDto } from './dto/update-branch.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Branch')
 @Controller('branch')
 export class BranchesController {
   constructor(private readonly branchService: BranchesService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create branch' })
   @ApiResponse({ status: 200, description: 'New branch' })
   @Post('create')
@@ -32,21 +31,19 @@ export class BranchesController {
     return branch;
   }
 
-  @ApiOperation({ summary: 'get all branches' })
   @ApiResponse({ status: 200, description: 'get all branch' })
   @Get('all')
   async getAllBranch(): Promise<Branch[]> {
     return this.branchService.getAllBranchs();
   }
 
-  @ApiOperation({ summary: 'get branchs by id' })
   @ApiResponse({ status: 200, description: 'get branch by id' })
   @Get(':id')
   async getBranchById(@Param('id') id: string): Promise<Branch> {
     return this.branchService.getBranchById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete branch' })
   @ApiResponse({ status: 200, description: 'delete branch' })
   @Delete('delete/:id')
@@ -54,7 +51,7 @@ export class BranchesController {
     return this.branchService.deleteBranchById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update branch' })
   @ApiResponse({ status: 200, description: 'update branch' })
   @Put('update/:id')
