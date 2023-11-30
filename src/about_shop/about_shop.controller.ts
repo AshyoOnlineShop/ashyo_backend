@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class AboutShopController {
   constructor(private readonly aboutShopService: AboutShopService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create aboutShop' })
   @ApiResponse({ status: 200, description: 'New aboutShop' })
   @Post('create')
@@ -38,7 +38,7 @@ export class AboutShopController {
     return this.aboutShopService.getAllAboutShops();
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'get aboutShops by id' })
   @ApiResponse({ status: 200, description: 'get aboutShop by id' })
   @Get(':id')
@@ -46,7 +46,7 @@ export class AboutShopController {
     return this.aboutShopService.getAboutShopById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete aboutShop' })
   @ApiResponse({ status: 200, description: 'delete aboutShop' })
   @Delete('delete/:id')
@@ -54,7 +54,7 @@ export class AboutShopController {
     return this.aboutShopService.deleteAboutShopById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update aboutShop' })
   @ApiResponse({ status: 200, description: 'update aboutShop' })
   @Put('update/:id')

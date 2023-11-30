@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class AttributeController {
   constructor(private readonly attributeService: AttributeService) {}
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create attribute' })
   @ApiResponse({ type: Attribute })
   @Post()
@@ -42,7 +42,7 @@ export class AttributeController {
     return this.attributeService.findOne(+id);
   }
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update attribute' })
   @ApiResponse({ type: [Number] })
   @Patch(':id')
@@ -53,7 +53,7 @@ export class AttributeController {
     return this.attributeService.update(+id, updateAttributeDto);
   }
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete attribute' })
   @ApiResponse({ type: Number })
   @Delete(':id')

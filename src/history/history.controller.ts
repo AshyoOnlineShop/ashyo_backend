@@ -30,7 +30,7 @@ export class HistoryController {
     return history;
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all histories' })
   @ApiResponse({ status: 200, description: 'Get all histories' })
   @Get('all')

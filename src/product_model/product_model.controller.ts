@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class ProductModelController {
   constructor(private readonly product_modelService: ProductModelService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create product_model' })
   @ApiResponse({ status: 200, description: 'New product_model' })
   @Post('create')
@@ -47,7 +47,7 @@ export class ProductModelController {
     return this.product_modelService.getProductModelById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete product_model' })
   @ApiResponse({ status: 200, description: 'delete product_model' })
   @Delete('delete/:id')
@@ -55,7 +55,7 @@ export class ProductModelController {
     return this.product_modelService.deleteProductModelById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update product_model' })
   @ApiResponse({ status: 200, description: 'update product_model' })
   @Put('update/:id')

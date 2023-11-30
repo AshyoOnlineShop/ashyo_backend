@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class ProductBranchesController {
   constructor(private readonly productBranchService: ProductBranchesService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create productBranch' })
   @ApiResponse({ status: 200, description: 'New productBranch' })
   @Post('create')
@@ -47,7 +47,7 @@ export class ProductBranchesController {
     return this.productBranchService.getProductBranchById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete productBranch' })
   @ApiResponse({ status: 200, description: 'delete productBranch' })
   @Delete('delete/:id')
@@ -55,7 +55,7 @@ export class ProductBranchesController {
     return this.productBranchService.deleteProductBranchById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update productBranch' })
   @ApiResponse({ status: 200, description: 'update productBranch' })
   @Put('update/:id')

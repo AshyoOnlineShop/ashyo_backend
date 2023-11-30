@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class Card_typesController {
   constructor(private readonly card_typesService: Card_typesService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create a new card type' })
   @ApiResponse({ status: 200, description: 'New card type' })
   @Post('create')
@@ -54,7 +54,7 @@ export class Card_typesController {
     return this.card_typesService.getCard_typesByName(name);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete card type by ID' })
   @ApiResponse({ status: 200, description: 'Delete card type by ID' })
   @Delete('delete/:id')
@@ -62,7 +62,7 @@ export class Card_typesController {
     return this.card_typesService.deleteCard_typesById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update card type by ID' })
   @ApiResponse({ status: 200, description: 'Update card type by ID' })
   @Put('update/:id')

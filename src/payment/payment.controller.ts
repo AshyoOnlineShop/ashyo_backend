@@ -30,7 +30,7 @@ export class PaymentController {
     return payment;
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all payments' })
   @ApiResponse({ status: 200, description: 'Get all payments' })
   @Get('all')

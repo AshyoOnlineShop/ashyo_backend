@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class RegionController {
   constructor(private readonly regionService: RegionService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create region' })
   @ApiResponse({ status: 200, description: 'New region' })
   @Post('create')
@@ -50,7 +50,7 @@ export class RegionController {
     return this.regionService.getRegionByName(name);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete region' })
   @ApiResponse({ status: 200, description: 'delete region' })
   @Delete('delete/:id')
@@ -58,7 +58,7 @@ export class RegionController {
     return this.regionService.deleteRegionById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update region' })
   @ApiResponse({ status: 200, description: 'update region' })
   @Put('update/:id')

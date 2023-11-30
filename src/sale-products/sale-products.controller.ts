@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class SaleProductsController {
   constructor(private readonly saleProductsService: SaleProductsService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create sale product' })
   @ApiResponse({ type: SaleProducts })
   @Post()
@@ -42,7 +42,7 @@ export class SaleProductsController {
     return this.saleProductsService.findOne(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update sale product' })
   @ApiResponse({ type: [Number] })
   @Patch(':id')
@@ -53,7 +53,7 @@ export class SaleProductsController {
     return this.saleProductsService.update(+id, updateBrandCategoryDto);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete sale product' })
   @ApiResponse({ type: Number })
   @Delete(':id')

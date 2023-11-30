@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class ProductInfoController {
   constructor(private readonly productInfoService: ProductInfoService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create product info' })
   @ApiResponse({ type: ProductInfo })
   @Post()
@@ -42,7 +42,7 @@ export class ProductInfoController {
     return this.productInfoService.findOne(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update product info' })
   @ApiResponse({ type: [Number] })
   @Patch(':id')
@@ -53,7 +53,7 @@ export class ProductInfoController {
     return this.productInfoService.update(+id, updateAttributeDto);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete product info' })
   @ApiResponse({ type: Number })
   @Delete(':id')

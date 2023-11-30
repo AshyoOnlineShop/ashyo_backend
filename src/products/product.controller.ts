@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create product' })
   @ApiResponse({ status: 200, description: 'New product' })
   @Post('create')
@@ -50,7 +50,7 @@ export class ProductController {
     return this.productService.getProductByCategoryId(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete product' })
   @ApiResponse({ status: 200, description: 'delete product' })
   @Delete('delete/:id')
@@ -58,7 +58,7 @@ export class ProductController {
     return this.productService.deleteProductById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update product' })
   @ApiResponse({ status: 200, description: 'update product' })
   @Put('update/:id')

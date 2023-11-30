@@ -21,7 +21,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create category' })
   @ApiResponse({ type: Category })
   @Post()
@@ -43,7 +43,7 @@ export class CategoryController {
     return this.categoryService.findOne(+id);
   }
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update category' })
   @ApiResponse({ type: [Number] })
   @Put(':id')
@@ -54,7 +54,7 @@ export class CategoryController {
     return this.categoryService.update(+id, updateCategoryDto);
   }
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete category' })
   @ApiResponse({ type: [Number] })
   @Delete(':id')

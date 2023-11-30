@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class BranchesController {
   constructor(private readonly branchService: BranchesService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create branch' })
   @ApiResponse({ status: 200, description: 'New branch' })
   @Post('create')
@@ -41,7 +41,7 @@ export class BranchesController {
     return this.branchService.getBranchById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete branch' })
   @ApiResponse({ status: 200, description: 'delete branch' })
   @Delete('delete/:id')
@@ -49,7 +49,7 @@ export class BranchesController {
     return this.branchService.deleteBranchById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update branch' })
   @ApiResponse({ status: 200, description: 'update branch' })
   @Put('update/:id')

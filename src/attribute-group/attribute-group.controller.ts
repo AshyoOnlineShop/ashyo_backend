@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class AttributeGroupController {
   constructor(private readonly attributeGroupService: AttributeGroupService) {}
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create attribute group' })
   @ApiResponse({ type: AttributeGroup })
   @Post()
@@ -49,7 +49,7 @@ export class AttributeGroupController {
     return this.attributeGroupService.getAllByCategoryId(+category_id);
   }
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update attribute group' })
   @ApiResponse({ type: [Number] })
   @Patch(':id')
@@ -60,7 +60,7 @@ export class AttributeGroupController {
     return this.attributeGroupService.update(+id, updateAttributeDto);
   }
 
-  // // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete attribute group' })
   @ApiResponse({ type: Number })
   @Delete(':id')

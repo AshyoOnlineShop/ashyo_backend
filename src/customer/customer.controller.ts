@@ -31,7 +31,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all customers' })
   @Get('all')
   async getAllCustomer() {
@@ -46,7 +46,7 @@ export class CustomerController {
     return this.customerService.getCustomerById(+id);
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete customer' })
   @Delete('delete/:id')
   async deleteCustomerById(@Param('id') id: string) {
@@ -87,7 +87,7 @@ export class CustomerController {
     return { message: 'Password changed successfully.' };
   }
 
-  // @UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Change customer activeness' })
   @Put('activeness/:id')
   async changeCustomerActiveness(
