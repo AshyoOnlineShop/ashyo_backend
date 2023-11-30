@@ -24,6 +24,7 @@ export class BranchesService {
   async getBranchById(id: number): Promise<Branch> {
     const branch = await this.branchRepo.findOne({
       where: { id },
+      include: { all: true },
     });
     return branch;
   }
@@ -40,7 +41,6 @@ export class BranchesService {
       where: { id },
       returning: true,
     });
-    console.log(branch);
 
     return branch[1][0].dataValues;
   }

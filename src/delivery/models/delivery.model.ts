@@ -1,10 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  BelongsTo,
   Column,
   DataType,
+  ForeignKey,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Order } from '../../order/models/order.model';
+import { Stuff } from '../../stuff/models/stuff.model';
 
 interface DeliveryAttributes {
   order_id: number;
@@ -23,17 +27,23 @@ export class Delivery extends Model<Delivery, DeliveryAttributes> {
   })
   id: number;
 
+  @ForeignKey(() => Order)
   @ApiProperty({ example: 123, description: 'Order ID' })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   order_id: number;
 
+  @ForeignKey(() => Stuff)
   @ApiProperty({ example: 456, description: 'Deliver ID' })
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   deliver_id: number;
 
@@ -50,4 +60,11 @@ export class Delivery extends Model<Delivery, DeliveryAttributes> {
     allowNull: false,
   })
   status: boolean;
+
+  // ======================RELATIONSHIPS=====================================
+  @BelongsTo(() => Order)
+  order: Order;
+
+  @BelongsTo(() => Stuff)
+  stuff: Stuff;
 }

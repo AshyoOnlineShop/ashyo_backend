@@ -28,6 +28,7 @@ export class AboutShopService {
   async getAboutShopById(id: number): Promise<AboutShop> {
     const aboutShop = await this.aboutShopRepo.findOne({
       where: { id },
+      include: { all: true }
     });
     return aboutShop;
   }

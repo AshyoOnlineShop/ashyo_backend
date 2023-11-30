@@ -13,7 +13,7 @@ import { CreateRegionDto } from './dto/create-region.dto';
 import { Region } from './models/region.model';
 import { UpdateRegionDto } from './dto/update-region.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Region')
 @Controller('region')

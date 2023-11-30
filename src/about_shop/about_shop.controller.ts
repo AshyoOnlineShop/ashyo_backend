@@ -13,8 +13,7 @@ import { CreateAboutShopDto } from './dto/create-about_shop.dto';
 import { AboutShop } from './models/about_shop.model';
 import { UpdateAboutShopDto } from './dto/update-about_shop.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('AboutShop')
 @Controller('aboutShop')
@@ -39,6 +38,7 @@ export class AboutShopController {
     return this.aboutShopService.getAllAboutShops();
   }
 
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'get aboutShops by id' })
   @ApiResponse({ status: 200, description: 'get aboutShop by id' })
   @Get(':id')

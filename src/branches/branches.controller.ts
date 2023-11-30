@@ -13,8 +13,7 @@ import { CreateBranchDto } from './dto/create-branch.dto';
 import { Branch } from './models/branch.model';
 import { UpdateBranchDto } from './dto/update-branch.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-// import { AdminSelfGuard } from '../guards/admin.self.guard';
-// import { AdminGuard } from '../guards/admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Branch')
 @Controller('branch')
@@ -26,20 +25,16 @@ export class BranchesController {
   @ApiResponse({ status: 200, description: 'New branch' })
   @Post('create')
   async createBranch(@Body() createBranchDto: CreateBranchDto) {
-    const branch = await this.branchService.createBranch(
-      createBranchDto,
-    );
+    const branch = await this.branchService.createBranch(createBranchDto);
     return branch;
   }
 
-  @ApiOperation({ summary: 'get all branches' })
   @ApiResponse({ status: 200, description: 'get all branch' })
   @Get('all')
   async getAllBranch(): Promise<Branch[]> {
     return this.branchService.getAllBranchs();
   }
 
-  @ApiOperation({ summary: 'get branchs by id' })
   @ApiResponse({ status: 200, description: 'get branch by id' })
   @Get(':id')
   async getBranchById(@Param('id') id: string): Promise<Branch> {

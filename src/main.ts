@@ -9,11 +9,12 @@ async function start() {
     const config = new DocumentBuilder()
       .setTitle('Ashyo OnlineShop Project')
       .setDescription('Mini project for Ashyo OnlineShop')
-      .setVersion('1.0.0') 
-      .addTag('NodeJs, NestJs, Postgres, Sequelize') 
+      .setVersion('1.0.0')
+      .addTag('NodeJs, NestJs, Postgres, Sequelize')
       .build();
 
     const PORT = process.env.PORT || 3003;
+    console.log(process.env.PORT)
     const app = await NestFactory.create(AppModule, {
       logger: ['error', 'warn', 'log'],
     });
@@ -23,6 +24,7 @@ async function start() {
     SwaggerModule.setup('/api/docs', app, document);
     app.use(cookieParser());
     app.useGlobalPipes(new ValidationPipe());
+    app.enableCors();
 
     await app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

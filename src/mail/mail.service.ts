@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Customer } from '../customer/models/customer.model';
+import { Stuff } from '../stuff/models/stuff.model';
 
 @Injectable()
 export class MailService {
@@ -10,7 +11,7 @@ export class MailService {
     console.log(url);
     await this.mailerService.sendMail({
       to: customer.email,
-      subject: 'Welcome to CleaningService App! Confirm your Email.',
+      subject: 'Welcome to AshyoOnlineShop! Confirm your Email.',
       template: './confirmation',
       context: {
         name: customer.first_name,
@@ -19,17 +20,17 @@ export class MailService {
     });
   }
 
-  // async sendAdminConfirmation(admin: Admin): Promise<void> {
-  //   const url = `${process.env.API_HOST}/api/admin/activate/${admin.activation_link}`;
-  //   console.log(url);
-  //   await this.mailerService.sendMail({
-  //     to: admin.email,
-  //     subject: 'Welcome to E-LIBRARY App! Confirm your Email.',
-  //     template: './confirmation',
-  //     context: {
-  //       name: admin.first_name,
-  //       url,
-  //     },
-  //   });
-  // }
+  async sendStuffConfirmation(stuff: Stuff): Promise<void> {
+    const url = `${process.env.API_HOST}/api/stuff/activate/${stuff.activation_link}`;
+    console.log(url);
+    await this.mailerService.sendMail({
+      to: stuff.email,
+      subject: 'Welcome to AshyoOnlineShop! Confirm your Email.',
+      template: './confirmation',
+      context: {
+        name: stuff.first_name,
+        url,
+      },
+    });
+  }
 }
