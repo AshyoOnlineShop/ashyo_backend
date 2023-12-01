@@ -61,41 +61,20 @@ import { ViewedProductsModule } from './viewed_products/viewed_products.module';
 import { LikedProductsModule } from './liked_products/liked_products.module';
 import { AdminCustomer } from './admin_customer/models/admin_customer.model';
 import { AdminCustomerModule } from './admin_customer/admin_customer.module';
-import { ImgModule } from './images/images.module';
-import { Img } from './images/model/img.model';
-import { MulterModule } from '@nestjs/platform-express';
-import { v4 } from 'uuid';
-
-
-const multer = require('multer');
-
-// Configure the multer storage
-const storage = multer.diskStorage({
-  destination: function(req, file, callback) {
-    // Specify the destination directory where the images will be stored
-    callback(null, './uploads');
-  },
-  filename: function (req, file, callback) {
-    // Specify the filename of the images
-    // You can use the original name, or generate a random name with an extension
-    callback(null, v4());
-  }
-});
-
-// Configure the multer file filter
-const fileFilter = (req, file, callback) => {
-  // Accept only image files with .jpg, .jpeg, or .png extensions
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    callback(null, true);
-  } else {
-    callback(null, false);
-  }
-};
 import { MailModule } from './mail/mail.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { resolve } from 'path';
+import { Commercial } from './commercial/models/commercial.model';
+import { CommercialModule } from './commercial/commercial.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
+    ServeStaticModule.forRoot({
+      rootPath: resolve(__dirname, '../', 'uploads'),
+      serveRoot: '/api/uploads',
+      exclude: ['/api/uploads/index.html'],
+    }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -134,15 +113,10 @@ import { MailModule } from './mail/mail.module';
         Comment,
         Rating,
         AdminCustomer,
-        Img
+        Commercial,
       ],
       autoLoadModels: true,
       logging: false,
-    }),
-    MulterModule.register({
-      dest: "./uploads",
-      storage: storage,
-      fileFilter: fileFilter
     }),
     DistrictModule,
     RegionModule,
@@ -174,7 +148,7 @@ import { MailModule } from './mail/mail.module';
     ViewedProductsModule,
     LikedProductsModule,
     AdminCustomerModule,
-    ImgModule
+    CommercialModule,
     MailModule,
   ],
   controllers: [],

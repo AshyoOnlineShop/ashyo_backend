@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateDistrictDto } from './dto/create-district.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { District } from './models/district.model';
@@ -18,11 +18,26 @@ export class DistrictService {
     return district;
   }
 
-  async getAllDistricts(): Promise<District[]> {
-    const district = await this.districtRepo.findAll({
-      include: { all: true },
-    });
-    return district;
+  async getAllDistricts(
+    page: number,
+    limit: number,
+  ): Promise<{ districts: District[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const districts = await this.districtRepo.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.districtRepo.count();
+      return { districts, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async getDistrictById(id: number): Promise<District> {

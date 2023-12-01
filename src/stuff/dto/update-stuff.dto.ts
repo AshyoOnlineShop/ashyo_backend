@@ -13,10 +13,10 @@ export class UpdateStuffDto extends PartialType(CreateStuffDto) {
   @IsOptional()
   last_name?: string;
 
-  @ApiProperty({ example: 'img/photo1.jpg', description: 'Stuff image' })
-  @IsString()
-  @IsOptional()
-  image?: string;
+  // @ApiProperty({ example: 'img/photo1.jpg', description: 'Stuff image' })
+  // @IsString()
+  // @IsOptional()
+  // image?: string;
 
   @ApiProperty({ example: 'john01@gmail.com', description: 'Stuff email' })
   @IsString()

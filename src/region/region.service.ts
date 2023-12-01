@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Region } from './models/region.model';
@@ -16,9 +16,26 @@ export class RegionService {
     return region;
   }
 
-  async getAllRegions(): Promise<Region[]> {
-    const region = await this.regionRepo.findAll({ include: { all: true } });
-    return region;
+  async getAllRegions(
+    page: number,
+    limit: number,
+  ): Promise<{ regions: Region[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const regions = await this.regionRepo.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.regionRepo.count();
+      return { regions, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async getRegionById(id: number): Promise<Region> {

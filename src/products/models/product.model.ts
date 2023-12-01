@@ -21,6 +21,7 @@ import { ProductModel } from '../../product_model/models/product_model.model';
 import { Brand } from '../../brands/models/brands.model';
 import { Rating } from '../../rating/models/rating.model';
 import { ViewedProduct } from '../../viewed_products/models/viewed_product.model';
+import { Commercial } from '../../commercial/models/commercial.model';
 
 interface ProductAttr {
   name: string;
@@ -104,6 +105,15 @@ export class Product extends Model<Product, ProductAttr> {
   quantity: number;
 
   //================== Relationships ================================
+  @BelongsTo(() => Category)
+  category: Category;
+
+  @BelongsTo(() => ProductModel)
+  product_model: ProductModel;
+
+  @BelongsTo(() => Brand)
+  brands: Brand;
+
   @BelongsToMany(() => Branch, () => ProductBranch)
   branches: Branch[];
 
@@ -128,12 +138,6 @@ export class Product extends Model<Product, ProductAttr> {
   @HasMany(() => ProductInfo)
   product_infos: ProductInfo[];
 
-  @BelongsTo(() => Category)
-  category: Category;
-
-  @BelongsTo(() => ProductModel)
-  product_model: ProductModel;
-
-  @BelongsTo(() => Brand)
-  brands: Brand;
+  @HasMany(() => Commercial)
+  commercials: Commercial[];
 }

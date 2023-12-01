@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { HistoryService } from './history.service';
 import { CreateHistoryDto } from './dto/create-history.dto';
@@ -21,7 +22,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Create a new history' })
   @ApiResponse({ status: 200, description: 'New history created' })
   @Post('create')
@@ -30,15 +31,17 @@ export class HistoryController {
     return history;
   }
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all histories' })
   @ApiResponse({ status: 200, description: 'Get all histories' })
-  @Get('all')
-  async getAllHistories(): Promise<History[]> {
-    return this.historyService.getAllHistories();
+  @Get('all/:q')
+  async getAllHistories(
+    @Query() q: any,
+  ): Promise<{ histories: History[]; count: number }> {
+    return this.historyService.getAllHistories(q?.page, q?.limit);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Get history by ID' })
   @ApiResponse({ status: 200, description: 'Get history by ID' })
   @Get(':id')
@@ -46,7 +49,7 @@ export class HistoryController {
     return this.historyService.getHistoryById(+id);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Delete history by ID' })
   @ApiResponse({ status: 200, description: 'Delete history by ID' })
   @Delete('delete/:id')
@@ -54,7 +57,7 @@ export class HistoryController {
     return this.historyService.deleteHistoryById(+id);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Update history' })
   @ApiResponse({ status: 200, description: 'Update history' })
   @Put('update/:id')

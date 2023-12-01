@@ -7,8 +7,7 @@ export class UpdateCard_typesDto extends PartialType(CreateCard_typesDto) {
     example: "humo",
     description: 'update card_types name',
   })
-  @IsNumber()
-  @IsNotEmpty()
+  @IsString()
   @IsOptional()
   name?: string;
 
@@ -17,7 +16,6 @@ export class UpdateCard_typesDto extends PartialType(CreateCard_typesDto) {
     description: 'update card_types name',
   })
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   description?: string;
 
@@ -26,7 +24,6 @@ export class UpdateCard_typesDto extends PartialType(CreateCard_typesDto) {
     description: 'update card_types image url',
   })
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   image?: string;
 

@@ -9,6 +9,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Res,
   UseGuards,
 } from '@nestjs/common';
@@ -31,21 +32,23 @@ import { AdminGuard } from '../guards/admin.guard';
 export class StuffController {
   constructor(private readonly stuffService: StuffService) {}
 
-  @UseGuards(SuperadminGuard)
+  // @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Get all stuffs' })
-  @Get('all')
-  async getAllStuff() {
-    return this.stuffService.getAllStuff();
+  @Get('all/:q')
+  async getAllStuff(
+    @Query() q: any,
+  ): Promise<{ stuffs: Stuff[]; count: number }> {
+    return this.stuffService.getAllStuff(q?.page, q?.limit);
   }
 
-  @UseGuards(SuperadminGuard)
+  // @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Get stuff by id' })
   @Get(':id')
   async getStuffById(@Param('id') id: string) {
     return this.stuffService.getStuffById(+id);
   }
 
-  @UseGuards(SuperadminGuard)
+  // @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Delete stuff' })
   @Delete('delete/:id')
   async deleteStuffById(@Param('id') id: string) {
@@ -82,7 +85,7 @@ export class StuffController {
     return { message: 'Password changed successfully.' };
   }
 
-  @UseGuards(SuperadminGuard)
+  // @UseGuards(SuperadminGuard)
   @ApiOperation({ summary: 'Change stuff activeness' })
   @Put('activeness/:id')
   async changeStuffActiveness(

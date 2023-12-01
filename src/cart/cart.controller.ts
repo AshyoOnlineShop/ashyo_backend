@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { CreateCartDto } from './dto/create-cart.dto';
@@ -20,7 +21,7 @@ import { CustomerGuard } from '../guards/customer.guard';
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'to create cart' })
   @ApiResponse({ status: 200, description: 'New cart' })
   @Post('create')
@@ -29,15 +30,15 @@ export class CartController {
     return cart;
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'get all cartes' })
   @ApiResponse({ status: 200, description: 'get all cart' })
-  @Get('all')
-  async getAllCart(): Promise<Cart[]> {
-    return this.cartService.getAllCarts();
+  @Get('all/:q')
+  async getAllCart(@Query() q: any): Promise<{ carts: Cart[]; count: number }> {
+    return this.cartService.getAllCarts(q?.page, q?.limit);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'get carts by id' })
   @ApiResponse({ status: 200, description: 'get cart by id' })
   @Get(':id')
@@ -45,7 +46,7 @@ export class CartController {
     return this.cartService.getCartById(+id);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'to delete cart' })
   @ApiResponse({ status: 200, description: 'delete cart' })
   @Delete('delete/:id')
@@ -53,7 +54,7 @@ export class CartController {
     return this.cartService.deleteCartById(+id);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'to update cart' })
   @ApiResponse({ status: 200, description: 'update cart' })
   @Put('update/:id')

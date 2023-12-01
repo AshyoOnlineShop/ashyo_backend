@@ -23,7 +23,7 @@ async function start() {
     SwaggerModule.setup('/api/docs', app, document);
     app.use(cookieParser());
     app.useGlobalPipes(new ValidationPipe());
-    app.enableCors();
+    app.enableCors({ origin: '*', credentials: true });
 
     await app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

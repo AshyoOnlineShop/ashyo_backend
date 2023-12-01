@@ -8,13 +8,8 @@ export class UpdateBrandDto extends PartialType(CreateBrandDto) {
   @IsString()
   name?: string;
 
-  @ApiProperty({ example: './img/photo.jpeg', description: 'brand image' })
-  @IsOptional()
-  @IsString()
-  image?: string;
-
   @ApiProperty({ example: 1, description: 'image position' })
   @IsOptional()
-  @IsNumber()
+  // @IsNumber()
   position?: number;
 }

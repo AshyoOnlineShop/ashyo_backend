@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateCategoryDto {
   @ApiProperty({ example: 'Phones', description: 'Name' })
@@ -9,16 +9,16 @@ export class CreateCategoryDto {
 
   @ApiProperty({ example: 1, description: 'Position' })
   @IsNotEmpty()
-  @IsNumber()
+  // @IsNumber()
   position: number;
 
   @ApiProperty({ example: 'img.png', description: 'Image' })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   image: string;
 
   @ApiProperty({ example: 1, description: 'Parent category id' })
   @IsNotEmpty()
-  @IsNumber()
+  // @IsNumber()
   parent_category_id: number;
 }

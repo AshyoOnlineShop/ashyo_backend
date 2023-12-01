@@ -17,9 +17,9 @@ export class CreateStuffDto {
   @IsString()
   last_name: string;
 
-  @ApiProperty({ example: 'img/photo1.jpg', description: 'Stuff image' })
-  @IsString()
-  image: string;
+  // @ApiProperty({ example: 'img/photo1.jpg', description: 'Stuff image' })
+  // @IsString()
+  // image: string;
 
   @ApiProperty({ example: 'john01@gmail.com', description: 'Stuff email' })
   @IsNotEmpty()

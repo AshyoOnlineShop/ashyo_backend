@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CustomerLocationService } from './customer_location.service';
 import { CreateCustomerLocationDto } from './dto/create-customer_location.dto';
@@ -37,15 +38,21 @@ export class CustomerLocationController {
     return customerLocation;
   }
 
-  @UseGuards(AdminGuard || DeliverGuard)
+  // @UseGuards(AdminGuard || DeliverGuard)
   @ApiOperation({ summary: 'get all customerLocationes' })
   @ApiResponse({ status: 200, description: 'get all customerLocation' })
-  @Get('all')
-  async getAllCustomerLocation(): Promise<CustomerLocation[]> {
-    return this.customerLocationService.getAllCustomerLocations();
+  @Get('all/:q')
+  async getAllCustomerLocation(@Query() q: any): Promise<{
+    customer_locations: CustomerLocation[];
+    count: number;
+  }> {
+    return this.customerLocationService.getAllCustomerLocations(
+      q?.page,
+      q?.limit,
+    );
   }
 
-  @UseGuards(AdminGuard || DeliverGuard)
+  // @UseGuards(AdminGuard || DeliverGuard)
   @ApiOperation({ summary: 'get customerLocations by id' })
   @ApiResponse({ status: 200, description: 'get customerLocation by id' })
   @Get(':id')
@@ -55,7 +62,7 @@ export class CustomerLocationController {
     return this.customerLocationService.getCustomerLocationById(+id);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'to delete customerLocation' })
   @ApiResponse({ status: 200, description: 'delete customerLocation' })
   @Delete('delete/:id')
@@ -63,7 +70,7 @@ export class CustomerLocationController {
     return this.customerLocationService.deleteCustomerLocationById(+id);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'to update customerLocation' })
   @ApiResponse({ status: 200, description: 'update customerLocation' })
   @Put('update/:id')

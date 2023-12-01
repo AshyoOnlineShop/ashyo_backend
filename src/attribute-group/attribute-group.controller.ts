@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { AttributeGroupService } from './attribute-group.service';
 import { CreateAttributeGroupDto } from './dto/create-attribute-group.dto';
@@ -29,10 +30,12 @@ export class AttributeGroupController {
   }
 
   @ApiOperation({ summary: 'Get attribute groups' })
-  @ApiResponse({ type: [AttributeGroup] })
-  @Get()
-  findAll() {
-    return this.attributeGroupService.findAll();
+  @ApiResponse({ status: 200, description: 'get all attribute groups' })
+  @Get('all/:q')
+  findAll(
+    @Query() q: any,
+  ): Promise<{ attr_groups: AttributeGroup[]; count: number }> {
+    return this.attributeGroupService.findAll(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'Get attribute group' })

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCustomerLocationDto } from './dto/create-customer_location.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { CustomerLocation } from './models/customer_location.model';
@@ -20,11 +20,26 @@ export class CustomerLocationService {
     return customerLocation;
   }
 
-  async getAllCustomerLocations(): Promise<CustomerLocation[]> {
-    const customerLocation = await this.customerLocationRepo.findAll({
-      include: { all: true },
-    });
-    return customerLocation;
+  async getAllCustomerLocations(
+    page: number,
+    limit: number,
+  ): Promise<{ customer_locations: CustomerLocation[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const customer_locations = await this.customerLocationRepo.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.customerLocationRepo.count();
+      return { customer_locations, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async getCustomerLocationById(id: number): Promise<CustomerLocation> {

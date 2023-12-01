@@ -1,17 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateProductMediaDto {
   @ApiProperty({ example: 1, description: 'product id' })
   @IsNotEmpty()
-  @IsNumber()
+  // @IsNumber()
   product_id: number;
 
   @ApiProperty({
     example: './img/photo1.jpeg',
     description: 'product media url',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   url: string;
 

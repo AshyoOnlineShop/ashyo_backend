@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ViewedProductsService } from './viewed_products.service';
 import { CreateViewedProductDto } from './dto/create-viewed_product.dto';
 import { UpdateViewedProductDto } from './dto/update-viewed_product.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CustomerGuard } from '../guards/customer.guard';
+import { ViewedProduct } from './models/viewed_product.model';
 
 @ApiTags('Viewed Products')
 @Controller('viewed-products')
@@ -28,9 +30,11 @@ export class ViewedProductsController {
 
   // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Get all viewed products' })
-  @Get()
-  findAll() {
-    return this.viewedProductsService.findAll();
+  @Get('all/:q')
+  findAll(
+    @Query() q: any,
+  ): Promise<{ viewed_products: ViewedProduct[]; count: number }> {
+    return this.viewedProductsService.findAll(q?.page, q?.limit);
   }
 
   // @UseGuards(CustomerGuard)

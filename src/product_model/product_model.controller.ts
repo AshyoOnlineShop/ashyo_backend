@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ProductModelService } from './product_model.service';
 import { CreateProductModelDto } from './dto/create-product_model.dto';
@@ -20,11 +21,13 @@ import { AdminGuard } from '../guards/admin.guard';
 export class ProductModelController {
   constructor(private readonly product_modelService: ProductModelService) {}
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create product_model' })
   @ApiResponse({ status: 200, description: 'New product_model' })
   @Post('create')
-  async createProductModel(@Body() createProductModelDto: CreateProductModelDto) {
+  async createProductModel(
+    @Body() createProductModelDto: CreateProductModelDto,
+  ) {
     const product_model = await this.product_modelService.createProductModel(
       createProductModelDto,
     );
@@ -33,9 +36,12 @@ export class ProductModelController {
 
   @ApiOperation({ summary: 'get all product_modeles' })
   @ApiResponse({ status: 200, description: 'get all product_model' })
-  @Get('all')
-  async getAllProductModel(): Promise<ProductModel[]> {
-    return this.product_modelService.getAllProductModels();
+  @Get('all/:q')
+  async getAllProductModel(@Query() q: any): Promise<{
+    product_models: ProductModel[];
+    count: number;
+  }> {
+    return this.product_modelService.getAllProductModels(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'get product_models by id' })
@@ -45,7 +51,7 @@ export class ProductModelController {
     return this.product_modelService.getProductModelById(+id);
   }
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete product_model' })
   @ApiResponse({ status: 200, description: 'delete product_model' })
   @Delete('delete/:id')
@@ -53,7 +59,7 @@ export class ProductModelController {
     return this.product_modelService.deleteProductModelById(+id);
   }
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update product_model' })
   @ApiResponse({ status: 200, description: 'update product_model' })
   @Put('update/:id')
@@ -61,6 +67,9 @@ export class ProductModelController {
     @Param('id') id: string,
     @Body() updateProductModelDto: UpdateProductModelDto,
   ): Promise<ProductModel> {
-    return this.product_modelService.updateProductModel(+id, updateProductModelDto);
+    return this.product_modelService.updateProductModel(
+      +id,
+      updateProductModelDto,
+    );
   }
 }

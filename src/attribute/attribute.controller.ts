@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Query,
+} from '@nestjs/common';
 import { AttributeService } from './attribute.service';
 import { CreateAttributeDto } from './dto/create-attribute.dto';
 import { UpdateAttributeDto } from './dto/update-attribute.dto';
@@ -14,16 +24,18 @@ export class AttributeController {
   @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create attribute' })
   @ApiResponse({ type: Attribute })
-  @Post()
+  @Post('create')
   create(@Body() createAttributeDto: CreateAttributeDto) {
     return this.attributeService.create(createAttributeDto);
   }
 
   @ApiOperation({ summary: 'Get attributes' })
-  @ApiResponse({ type: [Attribute] })
-  @Get()
-  findAll() {
-    return this.attributeService.findAll();
+  @ApiResponse({ status: 200, description: 'get all attributes' })
+  @Get('all/:q')
+  findAll(
+    @Query() q: any,
+  ): Promise<{ attributes: Attribute[]; count: number }> {
+    return this.attributeService.findAll(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'Get attribute' })
@@ -36,7 +48,7 @@ export class AttributeController {
   @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update attribute' })
   @ApiResponse({ type: [Number] })
-  @Patch(':id')
+  @Patch('update/:id')
   update(
     @Param('id') id: string,
     @Body() updateAttributeDto: UpdateAttributeDto,
@@ -47,7 +59,7 @@ export class AttributeController {
   @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete attribute' })
   @ApiResponse({ type: Number })
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.attributeService.remove(+id);
   }
