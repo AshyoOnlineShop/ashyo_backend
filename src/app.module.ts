@@ -174,7 +174,7 @@ import { MailModule } from './mail/mail.module';
     ViewedProductsModule,
     LikedProductsModule,
     AdminCustomerModule,
-    ImgModule
+    ImgModule,
     MailModule,
   ],
   controllers: [],
