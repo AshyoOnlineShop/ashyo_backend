@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -32,15 +33,17 @@ export class OrderController {
     return order;
   }
 
-  @UseGuards(AdminGuard || DeliverGuard)
+  // @UseGuards(AdminGuard || DeliverGuard)
   @ApiOperation({ summary: 'Get all orders' })
   @ApiResponse({ status: 200, description: 'Get all orders' })
-  @Get('all')
-  async getAllOrders(): Promise<Order[]> {
-    return this.orderService.getAllOrders();
+  @Get('all/:q')
+  async getAllOrders(
+    @Query() q: any,
+  ): Promise<{ orders: Order[]; count: number }> {
+    return this.orderService.getAllOrders(q?.page, q?.limit);
   }
 
-  @UseGuards(AdminGuard || DeliverGuard)
+  // @UseGuards(AdminGuard || DeliverGuard)
   @ApiOperation({ summary: 'Get an order by ID' })
   @ApiResponse({ status: 200, description: 'Get an order by ID' })
   @Get(':id')
@@ -48,7 +51,7 @@ export class OrderController {
     return this.orderService.getOrderById(+id);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Delete an order' })
   @ApiResponse({ status: 200, description: 'Delete an order' })
   @Delete('delete/:id')
@@ -56,7 +59,7 @@ export class OrderController {
     return this.orderService.deleteOrderById(+id);
   }
 
-  @UseGuards(CustomerGuard)
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'Update an order' })
   @ApiResponse({ status: 200, description: 'Update an order' })
   @Put('update/:id')

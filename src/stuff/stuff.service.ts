@@ -26,17 +26,25 @@ export class StuffService {
     private readonly mailService: MailService,
   ) {}
 
-  async getAllStuff(): Promise<Stuff[]> {
+  async getAllStuff(
+    page: number,
+    limit: number,
+  ): Promise<{ stuffs: Stuff[]; count: number }> {
     try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
       const stuffs = await this.stuffRepo.findAll({
         include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
       });
 
-      return stuffs;
+      const count = await this.stuffRepo.count();
+      return { stuffs, count };
     } catch (error) {
-      throw new InternalServerErrorException(
-        'An error occurred while fetching stuffs',
-      );
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
     }
   }
 

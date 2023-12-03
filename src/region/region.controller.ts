@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { RegionService } from './region.service';
 import { CreateRegionDto } from './dto/create-region.dto';
@@ -31,9 +32,11 @@ export class RegionController {
 
   @ApiOperation({ summary: 'get all regiones' })
   @ApiResponse({ status: 200, description: 'get all region' })
-  @Get('all')
-  async getAllRegion(): Promise<Region[]> {
-    return this.regionService.getAllRegions();
+  @Get('all/:q')
+  async getAllRegion(
+    @Query() q: any,
+  ): Promise<{ regions: Region[]; count: number }> {
+    return this.regionService.getAllRegions(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'get regions by id' })

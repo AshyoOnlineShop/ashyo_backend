@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateDeliveryDto } from './dto/create-delivery.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Delivery } from './models/delivery.model';
@@ -18,11 +18,26 @@ export class DeliveryService {
     return delivery;
   }
 
-  async getAllDeliverys(): Promise<Delivery[]> {
-    const delivery = await this.deliveryRepo.findAll({
-      include: { all: true },
-    });
-    return delivery;
+  async getAllDeliverys(
+    page: number,
+    limit: number,
+  ): Promise<{ deliveries: Delivery[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const deliveries = await this.deliveryRepo.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.deliveryRepo.count();
+      return { deliveries, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async getDeliveryById(id: number): Promise<Delivery> {

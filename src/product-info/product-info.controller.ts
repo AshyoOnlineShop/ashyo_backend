@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ProductInfoService } from './product-info.service';
 import { CreateProductInfoDto } from './dto/create-product-info.dto';
@@ -30,9 +31,11 @@ export class ProductInfoController {
 
   @ApiOperation({ summary: 'Get product info' })
   @ApiResponse({ type: [ProductInfo] })
-  @Get()
-  findAll() {
-    return this.productInfoService.findAll();
+  @Get('all/:q')
+  findAll(
+    @Query() q: any,
+  ): Promise<{ product_infos: ProductInfo[]; count: number }> {
+    return this.productInfoService.findAll(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'Get product info' })

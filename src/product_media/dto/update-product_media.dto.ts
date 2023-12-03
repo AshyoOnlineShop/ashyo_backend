@@ -4,8 +4,8 @@ import { IsNotEmpty, IsNumber, IsString, IsOptional } from 'class-validator';
 
 export class UpdateProductMediaDto extends PartialType(CreateProductMediaDto) {
   @ApiProperty({ example: 1, description: 'product id' })
-  @IsOptional()
-  @IsNumber()
+  // @IsOptional()
+  // @IsNumber()
   product_id?: number;
 
   @ApiProperty({

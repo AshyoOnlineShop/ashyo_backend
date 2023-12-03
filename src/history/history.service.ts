@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateHistoryDto } from './dto/create-history.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { History } from './models/history.model';
@@ -16,11 +16,26 @@ export class HistoryService {
     return history;
   }
 
-  async getAllHistories(): Promise<History[]> {
-    const histories = await this.historyRepo.findAll({
-      include: { all: true },
-    });
-    return histories;
+  async getAllHistories(
+    page: number,
+    limit: number,
+  ): Promise<{ histories: History[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const histories = await this.historyRepo.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.historyRepo.count();
+      return { histories, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async getHistoryById(id: number): Promise<History> {
@@ -28,10 +43,10 @@ export class HistoryService {
       where: { id },
       include: { all: true },
     });
-  //   if (!history) throw new Error('No such history');
-  //   return history;
-  // }
-  //   });
+    //   if (!history) throw new Error('No such history');
+    //   return history;
+    // }
+    //   });
     return history;
   }
 

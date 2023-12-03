@@ -22,7 +22,7 @@ import { AdminCustomer } from '../../admin_customer/models/admin_customer.model'
 interface CustomerAttr {
   first_name: string;
   last_name: string;
-  image: string;
+  // image: string;
   phone_number: string;
   email: string;
   password: string;
@@ -55,11 +55,11 @@ export class Customer extends Model<Customer, CustomerAttr> {
   })
   last_name: string;
 
-  @ApiProperty({ example: 'img/photo1.jpg', description: 'Customer image' })
-  @Column({
-    type: DataType.STRING,
-  })
-  image: string;
+  // @ApiProperty({ example: 'img/photo1.jpg', description: 'Customer image' })
+  // @Column({
+  //   type: DataType.STRING,
+  // })
+  // image: string;
 
   @ApiProperty({
     example: '+998998887766',

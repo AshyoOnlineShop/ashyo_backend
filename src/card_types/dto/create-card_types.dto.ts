@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateCard_typesDto {
   @ApiProperty({
     example: "humo",
     description: 'card_types name',
   })
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   name: string;
 
@@ -15,7 +15,7 @@ export class CreateCard_typesDto {
     description: 'card_types image url',
   })
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   image: string;
 
   @ApiProperty({

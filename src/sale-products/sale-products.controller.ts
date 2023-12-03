@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { SaleProductsService } from './sale-products.service';
 import { CreateSaleProductDto } from './dto/create-sale-product.dto';
@@ -30,9 +31,11 @@ export class SaleProductsController {
 
   @ApiOperation({ summary: 'Get sale products' })
   @ApiResponse({ type: [SaleProducts] })
-  @Get()
-  findAll() {
-    return this.saleProductsService.findAll();
+  @Get('all/:q')
+  findAll(
+    @Query() q: any,
+  ): Promise<{ sale_products: SaleProducts[]; count: number }> {
+    return this.saleProductsService.findAll(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'Get sale porduct' })
@@ -41,7 +44,6 @@ export class SaleProductsController {
   findOne(@Param('id') id: string) {
     return this.saleProductsService.findOne(+id);
   }
-
 
   @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update sale product' })

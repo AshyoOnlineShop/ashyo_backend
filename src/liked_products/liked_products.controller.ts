@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { LikedProductsService } from './liked_products.service';
 import { CreateLikedProductDto } from './dto/create-liked_product.dto';
 import { UpdateLikedProductDto } from './dto/update-liked_product.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AdminGuard } from '../guards/admin.guard';
+import { LikedProduct } from './models/liked_product.model';
 
 @ApiTags('Liked products')
 @Controller('liked-products')
@@ -26,9 +28,11 @@ export class LikedProductsController {
   }
 
   @ApiOperation({ summary: 'barcha foydalanuvchilarni chiqarish' })
-  @Get()
-  findAll() {
-    return this.likedProductsService.findAll();
+  @Get('all/:q')
+  findAll(
+    @Query() q: any,
+  ): Promise<{ liked_products: LikedProduct[]; count: number }> {
+    return this.likedProductsService.findAll(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: "id bo'yicha  chiqarish" })

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectModel } from '@nestjs/sequelize';
@@ -15,30 +15,45 @@ export class CommentsService {
     return comment;
   }
 
-  async findAll() {
-    const cart = await this.CommentRepository.findAll({
-      include: { all: true },
-    });
-    return cart;
+  async findAll(
+    page: number,
+    limit: number,
+  ): Promise<{ comments: Comment[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const comments = await this.CommentRepository.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.CommentRepository.count();
+      return { comments, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async findOne(id: number) {
-    const cart = await this.CommentRepository.findOne({
+    const comments = await this.CommentRepository.findOne({
       where: { id },
       include: { all: true },
     });
-    return cart;
+    return comments;
   }
 
   async update(id: number, updateCommentDto: UpdateCommentDto) {
-    const cart = await this.CommentRepository.update(updateCommentDto, {
+    const comments = await this.CommentRepository.update(updateCommentDto, {
       where: { id },
     });
-    return cart;
+    return comments;
   }
 
   async remove(id: number) {
-    const cart = await this.CommentRepository.destroy({ where: { id } });
-    return cart;
+    const comments = await this.CommentRepository.destroy({ where: { id } });
+    return comments;
   }
 }

@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -20,7 +21,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to create product' })
   @ApiResponse({ status: 200, description: 'New product' })
   @Post('create')
@@ -31,9 +32,11 @@ export class ProductController {
 
   @ApiOperation({ summary: 'get all productes' })
   @ApiResponse({ status: 200, description: 'get all product' })
-  @Get('all')
-  async getAllProduct(): Promise<Product[]> {
-    return this.productService.getAllProducts();
+  @Get('all/:q')
+  async getAllProduct(
+    @Query() q: any,
+  ): Promise<{ products: Product[]; count: number }> {
+    return this.productService.getAllProducts(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'get products by id' })
@@ -43,7 +46,7 @@ export class ProductController {
     return this.productService.getProductById(+id);
   }
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to delete product' })
   @ApiResponse({ status: 200, description: 'delete product' })
   @Delete('delete/:id')
@@ -51,7 +54,7 @@ export class ProductController {
     return this.productService.deleteProductById(+id);
   }
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'to update product' })
   @ApiResponse({ status: 200, description: 'update product' })
   @Put('update/:id')

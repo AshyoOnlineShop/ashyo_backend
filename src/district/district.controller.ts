@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { DistrictService } from './district.service';
 import { CreateDistrictDto } from './dto/create-district.dto';
@@ -33,9 +34,11 @@ export class DistrictController {
 
   @ApiOperation({ summary: 'get all districtes' })
   @ApiResponse({ status: 200, description: 'get all district' })
-  @Get('all')
-  async getAllDistrict(): Promise<District[]> {
-    return this.districtService.getAllDistricts();
+  @Get('all/:q')
+  async getAllDistrict(
+    @Query() q: any,
+  ): Promise<{ districts: District[]; count: number }> {
+    return this.districtService.getAllDistricts(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'get districts by id' })

@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CustomerCardService } from './customer_card.service';
 import { CreateCustomerCardDto } from './dto/create-customer_card.dto';
@@ -35,9 +36,12 @@ export class CustomerCardController {
 
   @ApiOperation({ summary: 'Get all customer cards' })
   @ApiResponse({ status: 200, description: 'Get all customer cards' })
-  @Get('all')
-  async getAllCustomerCards(): Promise<CustomerCard[]> {
-    return this.customerCardService.getAllCustomerCards();
+  @Get('all/:q')
+  async getAllCustomerCards(@Query() q: any): Promise<{
+    customer_cards: CustomerCard[];
+    count: number;
+  }> {
+    return this.customerCardService.getAllCustomerCards(q?.page, q?.limit);
   }
 
   @UseGuards(CustomerGuard)

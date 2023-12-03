@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Payment } from './models/payment.model';
@@ -16,9 +16,26 @@ export class PaymentService {
     return payment;
   }
 
-  async getAllPayments(): Promise<Payment[]> {
-    const payments = await this.paymentRepo.findAll({ include: { all: true } });
-    return payments;
+  async getAllPayments(
+    page: number,
+    limit: number,
+  ): Promise<{ payments: Payment[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const payments = await this.paymentRepo.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.paymentRepo.count();
+      return { payments, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async getPaymentById(id: number): Promise<Payment> {

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Cart } from './models/cart.model';
@@ -11,24 +11,37 @@ export class CartService {
     private cartRepo: typeof Cart,
   ) {}
 
-  async createCart(
-    createCartDto: CreateCartDto,
-  ): Promise<Cart> {
+  async createCart(createCartDto: CreateCartDto): Promise<Cart> {
     const cart = await this.cartRepo.create(createCartDto);
     return cart;
   }
 
-  async getAllCarts(): Promise<Cart[]> {
-    const cart = await this.cartRepo.findAll({
-      include: { all: true },
-    });
-    return cart;
+  async getAllCarts(
+    page: number,
+    limit: number,
+  ): Promise<{ carts: Cart[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const carts = await this.cartRepo.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.cartRepo.count();
+      return { carts, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async getCartById(id: number): Promise<Cart> {
     const cart = await this.cartRepo.findOne({
       where: { id },
-      include: { all: true }
+      include: { all: true },
     });
     return cart;
   }
@@ -37,10 +50,7 @@ export class CartService {
     return this.cartRepo.destroy({ where: { id } });
   }
 
-  async updateCart(
-    id: number,
-    updateCartDto: UpdateCartDto,
-  ): Promise<Cart> {
+  async updateCart(id: number, updateCartDto: UpdateCartDto): Promise<Cart> {
     const cart = await this.cartRepo.update(updateCartDto, {
       where: { id },
       returning: true,

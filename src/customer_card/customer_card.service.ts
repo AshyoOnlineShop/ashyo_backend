@@ -1,8 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCustomerCardDto } from './dto/create-customer_card.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { CustomerCard } from './models/customer_card.model';
-import { UpdateCustomerCardDto } from './dto/update-card_types.dto'; 
+import { UpdateCustomerCardDto } from './dto/update-card_types.dto';
 
 @Injectable()
 export class CustomerCardService {
@@ -20,11 +24,26 @@ export class CustomerCardService {
     return customerCard;
   }
 
-  async getAllCustomerCards(): Promise<CustomerCard[]> {
-    const customerCards = await this.customerCardRepo.findAll({
-      include: { all: true },
-    });
-    return customerCards;
+  async getAllCustomerCards(
+    page: number,
+    limit: number,
+  ): Promise<{ customer_cards: CustomerCard[]; count: number }> {
+    try {
+      let page1: number = +page > 0 ? +page : 1;
+      let limit1: number = +limit > 0 ? +limit : null;
+
+      const customer_cards = await this.customerCardRepo.findAll({
+        include: { all: true },
+        offset: (page1 - 1) * limit1,
+        limit: limit1,
+      });
+
+      const count = await this.customerCardRepo.count();
+      return { customer_cards, count };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException('Bad request from client');
+    }
   }
 
   async getCustomerCardById(id: number): Promise<CustomerCard> {
@@ -35,14 +54,14 @@ export class CustomerCardService {
     return customerCard;
   }
 
-//   async getCustomerCardByName(name: string): Promise<CustomerCard> {
-//     console.log(name);
-//     const customerCard = await this.customerCardRepo.findOne({
-//       where: { name },
-//       include: { all: true },
-//     });
-//     return customerCard;
-//   }
+  //   async getCustomerCardByName(name: string): Promise<CustomerCard> {
+  //     console.log(name);
+  //     const customerCard = await this.customerCardRepo.findOne({
+  //       where: { name },
+  //       include: { all: true },
+  //     });
+  //     return customerCard;
+  //   }
 
   async deleteCustomerCardById(id: number): Promise<number> {
     return this.customerCardRepo.destroy({ where: { id } });

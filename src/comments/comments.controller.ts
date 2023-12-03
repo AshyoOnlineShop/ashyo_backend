@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerGuard } from '../guards/customer.guard';
+import { Comment } from './models/comment.model';
 
 @ApiTags('Comments')
 @Controller('comments')
@@ -29,9 +31,10 @@ export class CommentsController {
   @ApiOperation({
     summary: 'Foydalanuvchilarni kommentini barchasini chiqarish',
   })
-  @Get()
-  findAll() {
-    return this.commentsService.findAll();
+  @ApiResponse({ status: 200, description: 'get all comments' })
+  @Get('all/:q')
+  findAll(@Query() q: any): Promise<{ comments: Comment[]; count: number }> {
+    return this.commentsService.findAll(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: "id bo'yicha chiqarish" })

@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { DeliveryService } from './delivery.service';
 import { CreateDeliveryDto } from './dto/create-delivery.dto';
@@ -31,9 +32,11 @@ export class DeliveryController {
 
   @ApiOperation({ summary: 'get all deliveryes' })
   @ApiResponse({ status: 200, description: 'get all delivery' })
-  @Get('all')
-  async getAllDelivery(): Promise<Delivery[]> {
-    return this.deliveryService.getAllDeliverys();
+  @Get('all/:q')
+  async getAllDelivery(
+    @Query() q: any,
+  ): Promise<{ deliveries: Delivery[]; count: number }> {
+    return this.deliveryService.getAllDeliverys(q?.page, q?.limit);
   }
 
   @ApiOperation({ summary: 'get deliverys by id' })

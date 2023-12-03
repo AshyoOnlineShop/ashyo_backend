@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
@@ -15,7 +16,6 @@ import { UpdatePaymentDto } from './dto/update-payment.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerGuard } from '../guards/customer.guard';
 import { AdminGuard } from '../guards/admin.guard';
-
 
 @ApiTags('Payment')
 @Controller('payment')
@@ -34,9 +34,11 @@ export class PaymentController {
   @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Get all payments' })
   @ApiResponse({ status: 200, description: 'Get all payments' })
-  @Get('all')
-  async getAllPayments(): Promise<Payment[]> {
-    return this.paymentService.getAllPayments();
+  @Get('all/:q')
+  async getAllPayments(
+    @Query() q: any,
+  ): Promise<{ payments: Payment[]; count: number }> {
+    return this.paymentService.getAllPayments(q?.page, q?.limit);
   }
 
   @UseGuards(CustomerGuard)

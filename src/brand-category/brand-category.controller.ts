@@ -20,7 +20,7 @@ import { AdminGuard } from '../guards/admin.guard';
 export class BrandCategoryController {
   constructor(private readonly brandCategoryService: BrandCategoryService) {}
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Create brand category' })
   @ApiResponse({ type: BrandCategory })
   @Post()
@@ -42,7 +42,7 @@ export class BrandCategoryController {
     return this.brandCategoryService.findOne(+id);
   }
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Update brand category' })
   @ApiResponse({ type: [Number] })
   @Patch(':id')
@@ -53,7 +53,7 @@ export class BrandCategoryController {
     return this.brandCategoryService.update(+id, updateBrandCategoryDto);
   }
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @ApiOperation({ summary: 'Delete brand category' })
   @ApiResponse({ type: Number })
   @Delete(':id')

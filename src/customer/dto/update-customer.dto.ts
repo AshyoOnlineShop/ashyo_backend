@@ -13,10 +13,10 @@ export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {
   @IsOptional()
   last_name?: string;
 
-  @ApiProperty({ example: 'img/photo1.jpg', description: 'Customer image' })
-  @IsString()
-  @IsOptional()
-  image?: string;
+  // @ApiProperty({ example: 'img/photo1.jpg', description: 'Customer image' })
+  // @IsString()
+  // @IsOptional()
+  // image?: string;
 
   @ApiProperty({ example: 'john01@gmail.com', description: 'Customer email' })
   @IsString()
