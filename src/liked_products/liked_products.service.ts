@@ -1,5 +1,9 @@
 import { LikedProduct } from './models/liked_product.model';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateLikedProductDto } from './dto/create-liked_product.dto';
 import { UpdateLikedProductDto } from './dto/update-liked_product.dto';
 import { InjectModel } from '@nestjs/sequelize';
@@ -56,8 +60,37 @@ export class LikedProductsService {
     return liked;
   }
 
-  async remove(id: number) {
-    const liked = await this.LikedProductRepository.destroy({ where: { id } });
-    return liked;
+  // async remove(productId, customerId) {
+  //   const liked = await this.LikedProductRepository.destroy({
+  //     where: {
+  //       product_id: productId,
+  //       customer_id: customerId,
+  //     },
+  //   });
+  //   return liked;
+  // }
+
+  async remove(productId: number, customerId: number) {
+    try {
+      const liked = await this.LikedProductRepository.destroy({
+        where: {
+          product_id: productId,
+          customer_id: customerId,
+        },
+      });
+
+      if (!liked) {
+        throw new NotFoundException('Product or cutsomer id is incorrect!');
+      }
+
+      const response = {
+        message: `Product with ID ${productId} removed from likes.`,
+        status: liked,
+      };
+      return response;
+    } catch (error) {
+      console.error('Error removing liked product:', error);
+      return 'Error removing product like';
+    }
   }
 }

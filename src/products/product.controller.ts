@@ -8,6 +8,8 @@ import {
   Put,
   UseGuards,
   Query,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -15,6 +17,7 @@ import { Product } from './models/product.model';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AdminGuard } from '../guards/admin.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Product')
 @Controller('product')
@@ -22,11 +25,27 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   // @UseGuards(AdminGuard)
+  // @ApiOperation({ summary: 'to create product' })
+  // @ApiResponse({ status: 200, description: 'New product' })
+  // @Post('create')
+  // async createProduct(@Body() createProductDto: CreateProductDto) {
+  //   const product = await this.productService.createProduct(createProductDto);
+  //   return product;
+  // }
+
   @ApiOperation({ summary: 'to create product' })
   @ApiResponse({ status: 200, description: 'New product' })
   @Post('create')
-  async createProduct(@Body() createProductDto: CreateProductDto) {
-    const product = await this.productService.createProduct(createProductDto);
+  @UseInterceptors(FileInterceptor('image'))
+  async createProduct(
+    @Body() createProductDto: CreateProductDto,
+    @UploadedFile()
+    image: any,
+  ) {
+    const product = await this.productService.createProduct(
+      createProductDto,
+      image,
+    );
     return product;
   }
 
@@ -55,13 +74,25 @@ export class ProductController {
   }
 
   // @UseGuards(AdminGuard)
+  // @ApiOperation({ summary: 'to update product' })
+  // @ApiResponse({ status: 200, description: 'update product' })
+  // @Put('update/:id')
+  // async updateProduct(
+  //   @Param('id') id: string,
+  //   @Body() updateProductDto: UpdateProductDto,
+  // ): Promise<Product> {
+  //   return this.productService.updateProduct(+id, updateProductDto);
+  // }
+
   @ApiOperation({ summary: 'to update product' })
   @ApiResponse({ status: 200, description: 'update product' })
   @Put('update/:id')
-  async updateProduct(
+  @UseInterceptors(FileInterceptor('image'))
+  async updateCommercial(
     @Param('id') id: string,
     @Body() updateProductDto: UpdateProductDto,
+    @UploadedFile() image: any,
   ): Promise<Product> {
-    return this.productService.updateProduct(+id, updateProductDto);
+    return this.productService.updateProduct(+id, updateProductDto, image);
   }
 }

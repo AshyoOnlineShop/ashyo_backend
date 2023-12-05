@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
+  Get, 
   HttpCode,
   HttpStatus,
   NotFoundException,
@@ -47,7 +47,7 @@ export class CustomerController {
   @ApiOperation({ summary: 'Get customer by id' })
   @Get(':id')
   async getCustomerById(@Param('id') id: string) {
-    return this.customerService.getCustomerById(+id);
+    return this.customerService.getCustomerById(+id); 
   }
 
   // @UseGuards(AdminGuard)

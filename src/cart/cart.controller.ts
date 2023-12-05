@@ -8,6 +8,7 @@ import {
   Put,
   UseGuards,
   Query,
+  BadRequestException,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { CreateCartDto } from './dto/create-cart.dto';
@@ -39,6 +40,26 @@ export class CartController {
   }
 
   // @UseGuards(CustomerGuard)
+  @ApiOperation({ summary: 'get all customer carts' })
+  @ApiResponse({ status: 200, description: 'get all cart' })
+  @Get('all/:customerId/:q')
+  async getAllCustomerCarts(
+    @Param('customerId') customerId: string,
+    @Query() q: any,
+  ): Promise<{ carts: Cart[]; count: number }> {
+    const parsedCustomerId = +customerId;
+
+    if (isNaN(parsedCustomerId)) {
+      throw new BadRequestException('Invalid customer ID');
+    }
+
+    const page = q?.page ? +q.page : undefined;
+    const limit = q?.limit ? +q.limit : undefined;
+
+    return this.cartService.getAllCustomerCarts(parsedCustomerId, page, limit);
+  }
+
+  // @UseGuards(CustomerGuard)
   @ApiOperation({ summary: 'get carts by id' })
   @ApiResponse({ status: 200, description: 'get cart by id' })
   @Get(':id')
@@ -63,5 +84,14 @@ export class CartController {
     @Body() updateCartDto: UpdateCartDto,
   ): Promise<Cart> {
     return this.cartService.updateCart(+id, updateCartDto);
+  }
+
+  @ApiOperation({ summary: "id bo'yicha o'chirish" })
+  @Delete('remove/:productId/:customerId')
+  remove(
+    @Param('productId') productId: string,
+    @Param('customerId') customerId: string,
+  ) {
+    return this.cartService.remove(+productId, +customerId);
   }
 }

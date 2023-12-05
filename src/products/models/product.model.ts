@@ -31,6 +31,7 @@ interface ProductAttr {
   model_id: number;
   brand_id: number;
   quantity: number;
+  image: string;
 }
 
 @Table({ tableName: 'product' })
@@ -103,6 +104,12 @@ export class Product extends Model<Product, ProductAttr> {
     allowNull: false,
   })
   quantity: number;
+
+  @ApiProperty({ example: 'img.png', description: 'product img' })
+  @Column({
+    type: DataType.STRING,
+  })
+  image: string;
 
   //================== Relationships ================================
   @BelongsTo(() => Category)

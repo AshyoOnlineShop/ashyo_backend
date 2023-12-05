@@ -52,14 +52,13 @@ export class Cart extends Model<Cart, CartAttr> {
   @ApiProperty({ example: 5, description: 'product quantity' })
   @Column({
     type: DataType.INTEGER,
-    allowNull: false,
+    defaultValue: 1,
   })
   quantity: number;
 
   @ApiProperty({ example: false, description: 'product status' })
   @Column({
     type: DataType.BOOLEAN,
-    allowNull: false,
     defaultValue: false,
   })
   status: boolean;

@@ -18,17 +18,17 @@ export class UpdateProductDto extends PartialType(CreateProductDto) {
 
   @ApiProperty({ example: 235000, description: 'product price' })
   @IsOptional()
-  @IsNumber()
+  // @IsNumber()
   price?: number;
 
   @ApiProperty({ example: 1, description: 'category id' })
   @IsOptional()
-  @IsNumber()
+  // @IsNumber()
   category_id?: number;
 
   @ApiProperty({ example: 1, description: 'model id' })
   @IsOptional()
-  @IsNumber()
+  // @IsNumber()
   model_id?: number;
 
   @ApiProperty({ example: 1, description: 'brand id' })
@@ -38,6 +38,11 @@ export class UpdateProductDto extends PartialType(CreateProductDto) {
 
   @ApiProperty({ example: 100, description: 'product quantity' })
   @IsOptional()
-  @IsNumber()
+  // @IsNumber()
   quantity?: number;
+
+  @ApiProperty({ example: 'img.png', description: 'product img' })
+  @IsOptional()
+  @IsString()
+  image?: string;
 }

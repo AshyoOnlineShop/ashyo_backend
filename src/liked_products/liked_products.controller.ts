@@ -50,9 +50,18 @@ export class LikedProductsController {
     return this.likedProductsService.update(+id, updateLikedProductDto);
   }
 
-  @ApiOperation({ summary: "id bo'yicha  o'chirish" })
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.likedProductsService.remove(+id);
+  // @ApiOperation({ summary: "id bo'yicha  o'chirish" })
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.likedProductsService.remove(+id);
+  // }
+
+  @ApiOperation({ summary: "id bo'yicha o'chirish" })
+  @Delete('remove/:productId/:customerId')
+  remove(
+    @Param('productId') productId: string,
+    @Param('customerId') customerId: string,
+  ) {
+    return this.likedProductsService.remove(+productId, +customerId);
   }
 }
